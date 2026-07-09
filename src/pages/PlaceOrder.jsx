@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const PlaceOrder = () => {
   const {
@@ -12,14 +13,17 @@ const PlaceOrder = () => {
     clearCart,
     getProductPrice,
   } = useContext(ShopContext);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  // Tự điền từ profile
   const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    address: "",
+    name: user?.name || "",
+    phone: user?.phone || "",
+    address: user?.address || "",
     note: "",
   });
+
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);

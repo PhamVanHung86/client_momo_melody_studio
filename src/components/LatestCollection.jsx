@@ -43,7 +43,7 @@ const LatestCollection = () => {
       <div className="text-center mt-12">
         <Link
           to="/collection"
-          className="inline-block bg-[#FFB7C5] text-white px-10 py-3 rounded-full text-sm font-semibold hover:bg-[#ff9db5] active:scale-95 transition-all duration-300 shadow-sm"
+          className="inline-block bg-[#b8deff] text-white px-10 py-3 rounded-full text-sm font-semibold hover:bg-[#ff9db5] active:scale-95 transition-all duration-300 shadow-sm"
         >
           Xem tất cả sản phẩm 🛍️
         </Link>

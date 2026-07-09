@@ -101,7 +101,7 @@ const ShopContextProvider = (props) => {
     const product = products.find((p) => p._id === productId);
     if (!product) return 0;
 
-    if (flashSale) {
+    if (flashSale && flashSale.products) {
       const onSale = flashSale.products.some((p) => p._id === productId);
       if (onSale) {
         return Math.round(

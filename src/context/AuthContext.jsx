@@ -62,6 +62,20 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("cartItems"); // ← xóa cart luôn
   };
 
+  const updateProfile = async (formData) => {
+    const res = await fetch("http://localhost:4000/api/auth/profile", {
+      method: "PUT",
+      credentials: "include",
+      body: formData,
+    });
+    const data = await res.json();
+    if (data.success) setUser(data.user);
+    return data;
+  };
+
+  // Thêm vào value:
+  // updateProfile,
+
   return (
     <AuthContext.Provider
       value={{
@@ -72,6 +86,7 @@ const AuthProvider = ({ children }) => {
         loginWithGoogle,
         logout,
         checkAuth,
+        updateProfile,
       }}
     >
       {children}

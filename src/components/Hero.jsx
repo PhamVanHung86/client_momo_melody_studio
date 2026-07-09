@@ -48,10 +48,10 @@ const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full bg-gradient-to-br from-[#EDE8F5] via-[#E8E4F5] to-[#F0E8F5]">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-0 flex flex-col md:flex-row items-center min-h-[88vh]">
+    <div className="w-full bg-[url('/images/bg-mobile.jpg')] bg-cover bg-center bg-no-repeat">
+      <div className="max-w-8xl mx-auto px-8 md:px-16 lg:px-24 py-0 flex flex-col md:flex-row items-center min-h-[88vh]">
         {/* Trái: Text — 40% */}
-        <div className="w-full md:w-[40%] flex flex-col gap-5 py-12 md:py-0 pr-0 md:pr-8">
+        <div className="w-full md:w-[40%] flex flex-col gap-5 py-12 md:py-0 pr-0 md:pr-8 pl-16">
           {/* Tag */}
           <div className="flex items-center gap-2">
             <div className="w-5 h-[1.5px] bg-[#FFB7C5]" />
@@ -108,7 +108,7 @@ const Hero = () => {
         </div>
 
         {/* Phải: Ảnh — 60% */}
-        <div className="w-full md:w-[60%] h-full flex items-center justify-end py-8 md:py-10">
+        <div className="w-full md:w-[55%] h-full flex items-right justify-end py-4 md:py-10">
           <div className="relative w-full">
             {/* Blob trang trí */}
             <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#FFD6E0]/30 rounded-full blur-3xl pointer-events-none" />

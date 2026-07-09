@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
 import Product from "./pages/Product";
@@ -20,6 +21,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollRestoration from "./components/ScrollRestoration";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -27,22 +29,31 @@ const App = () => {
       <Navbar />
       <ScrollRestoration />
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="cart" element={<Cart />} />
         <Route path="/product/:productId" element={<Product />} />
-        <Route path="login" element={<Login />} />
-        <Route path="orders" element={<Orders />} />
 
+        {/* Danh mục sản phẩm */}
         <Route path="/phone-charms" element={<PhoneCharms />} />
         <Route path="/keychain" element={<Keychain />} />
         <Route path="/pins" element={<Pins />} />
-        <Route path="/mail-clup" element={<MailClub />} />
         <Route path="/postcards" element={<Postcards />} />
+        <Route path="/mail-club" element={<MailClub />} />
         <Route path="/stickers" element={<Stickers />} />
+        <Route path="/contact" element={<Contact />} />
 
-        <Route path="cart" element={<Cart />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="place-order"
           element={

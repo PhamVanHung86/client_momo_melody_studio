@@ -10,7 +10,7 @@ const CategoryPage = ({ title, category, emoji, description }) => {
   );
 
   return (
-    <div className="min-h-screen bg-[#FFFAF5]">
+    <div className="bg-[#FFFAF5]">
       {/* Banner đầu trang */}
       <div className="bg-pastel-blue-light py-14 text-center px-4">
         <span className="text-5xl">{emoji}</span>

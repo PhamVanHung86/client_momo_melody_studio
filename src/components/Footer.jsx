@@ -4,7 +4,7 @@ import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <footer className="mt-20 bg-pastel-blue/50 text-[#4A4A6A]">
+    <footer className="bg-pastel-blue/50 text-[#4A4A6A]">
       {/* Main footer */}
       <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Cột 1: Thương hiệu */}

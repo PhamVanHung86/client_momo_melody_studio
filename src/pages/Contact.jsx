@@ -9,11 +9,24 @@ const Contact = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!form.name || !form.email || !form.message) return;
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setSent(false), 3000);
+
+    try {
+      const res = await fetch("http://localhost:4000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setSent(false), 3000);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

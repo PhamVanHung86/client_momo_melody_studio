@@ -72,7 +72,7 @@ const Hero = () => {
           <div className="w-10 h-[2px] bg-[#FFB7C5] rounded-full" />
 
           {/* Mô tả */}
-          <p className="text-[13px] md:text-sm text-[#4A4A6A]/55 leading-relaxed">
+          <p className="text-[13px] md:text-sm text-white leading-relaxed">
             {slides[activeIndex].desc}
           </p>
 

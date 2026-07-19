@@ -5,16 +5,19 @@ import PromoBanner from "../components/PromoBanner";
 import CategoryGrid from "../components/CategoryGrid";
 import FlashSaleBanner from "../components/FlashSaleBanner";
 import ComingSoonBanner from "../components/ComingSoonBanner";
+import AnimatePage from "../components/AnimatePage";
 
 const Home = () => {
   return (
     <div>
-      <Hero />
-      <ComingSoonBanner />
-      <FlashSaleBanner />
-      <LatestCollection />
-      <CategoryGrid />
-      <PromoBanner />
+      <AnimatePage>
+        <Hero />
+        <ComingSoonBanner />
+        <FlashSaleBanner />
+        <LatestCollection />
+        <CategoryGrid />
+        <PromoBanner />
+      </AnimatePage>
     </div>
   );
 };

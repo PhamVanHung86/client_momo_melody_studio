@@ -1,6 +1,7 @@
 import React, { useContext, useState, useMemo } from "react";
 import { ShopContext } from "../context/ShopContext";
 import ProductItem from "../components/ProductItem";
+import { ProductGridSkeleton } from "../components/ProductSkeleton";
 
 const CATEGORIES = [
   { label: "Tất cả", value: "all" },
@@ -20,7 +21,7 @@ const SORT_OPTIONS = [
 ];
 
 const Collection = () => {
-  const { products } = useContext(ShopContext);
+  const { products, loadingProducts } = useContext(ShopContext);
 
   const [activeCategory, setActiveCategory] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
@@ -130,7 +131,9 @@ const Collection = () => {
         </div>
 
         {/* Grid sản phẩm */}
-        {filtered.length > 0 ? (
+        {loadingProducts ? (
+          <ProductGridSkeleton count={8} />
+        ) : filtered.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10">
             {filtered.map((item) => (
               <ProductItem

@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
 import ProductItem from "./ProductItem";
+import { ProductGridSkeleton } from "./ProductSkeleton";
 
 const CategoryPage = ({ title, category, emoji, description }) => {
-  const { products } = useContext(ShopContext);
+  const { products, loadingProducts } = useContext(ShopContext);
 
   const filtered = products.filter(
     (p) => p.category?.toLowerCase() === category.toLowerCase(),
@@ -27,7 +28,9 @@ const CategoryPage = ({ title, category, emoji, description }) => {
 
       {/* Grid sản phẩm */}
       <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] py-12">
-        {filtered.length > 0 ? (
+        {loadingProducts ? (
+          <ProductGridSkeleton count={8} />
+        ) : filtered.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10">
             {filtered.map((item, index) => (
               <ProductItem

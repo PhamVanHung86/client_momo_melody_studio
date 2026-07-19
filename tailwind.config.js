@@ -16,6 +16,17 @@ export default {
         "bg-card": "#FFF0F5",
         "text-main": "#4A4A6A",
       },
+      fontFamily: {
+        // Đăng ký toàn bộ danh sách font bạn đã import
+        sans: ["Outfit", "sans-serif"], // Đặt Outfit làm mặc định
+        balsamiq: ['"Balsamiq Sans"', "sans-serif"],
+        fredoka: ["Fredoka", "sans-serif"],
+        manrope: ["Manrope", "sans-serif"],
+        playwrite: ['"Playwrite GB J"', "cursive"],
+        poppins: ["Poppins", "sans-serif"],
+        prata: ["Prata", "serif"],
+        urbanist: ["Urbanist", "sans-serif"],
+      },
     },
   },
   plugins: [],

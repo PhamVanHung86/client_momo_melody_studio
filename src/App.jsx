@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
@@ -22,55 +23,62 @@ import ScrollToTop from "./components/ScrollToTop";
 import ScrollRestoration from "./components/ScrollRestoration";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
+  const location = useLocation();
   return (
     <div>
       <Navbar />
       <ScrollRestoration />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/about" element={<About />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="/product/:productId" element={<Product />} />
+      <AnimatePresence mode="wait">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/about" element={<About />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="/product/:productId" element={<Product />} />
 
-        {/* Danh mục sản phẩm */}
-        <Route path="/phone-charms" element={<PhoneCharms />} />
-        <Route path="/keychain" element={<Keychain />} />
-        <Route path="/pins" element={<Pins />} />
-        <Route path="/postcards" element={<Postcards />} />
-        <Route path="/mail-club" element={<MailClub />} />
-        <Route path="/stickers" element={<Stickers />} />
-        <Route path="/contact" element={<Contact />} />
+          {/* Danh mục sản phẩm */}
+          <Route path="/phone-charms" element={<PhoneCharms />} />
+          <Route path="/keychain" element={<Keychain />} />
+          <Route path="/pins" element={<Pins />} />
+          <Route path="/postcards" element={<Postcards />} />
+          <Route path="/mail-club" element={<MailClub />} />
+          <Route path="/stickers" element={<Stickers />} />
+          <Route path="/contact" element={<Contact />} />
 
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="place-order"
-          element={
-            <ProtectedRoute>
-              <PlaceOrder />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="orders"
-          element={
-            <ProtectedRoute>
-              <Orders />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="place-order"
+            element={
+              <ProtectedRoute>
+                <PlaceOrder />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AnimatePresence>
+
       <Footer />
       <ScrollToTop />
     </div>

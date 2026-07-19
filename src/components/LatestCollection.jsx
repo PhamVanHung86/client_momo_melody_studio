@@ -3,9 +3,10 @@ import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
+import { ProductGridSkeleton } from "./ProductSkeleton";
 
 const LatestCollection = () => {
-  const { products } = useContext(ShopContext);
+  const { products, loadingProducts } = useContext(ShopContext);
   const [latestProducts, setLatestProducts] = useState([]);
 
   useEffect(() => {
@@ -26,18 +27,22 @@ const LatestCollection = () => {
       </div>
 
       {/* Grid sản phẩm */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10">
-        {latestProducts.map((item) => (
-          <ProductItem
-            key={item._id}
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
-            stock={item.stock}
-          />
-        ))}
-      </div>
+      {loadingProducts ? (
+        <ProductGridSkeleton count={8} />
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10">
+          {latestProducts.map((item) => (
+            <ProductItem
+              key={item._id}
+              id={item._id}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+              stock={item.stock}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Nút xem thêm */}
       <div className="text-center mt-12">

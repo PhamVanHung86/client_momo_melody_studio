@@ -17,7 +17,7 @@ const categories = [
   { name: "Pins", path: "/pins", emoji: "🍀", desc: "Ghim cài cute" },
   {
     name: "Mail Club",
-    path: "/mail-clup",
+    path: "/mail-club",
     emoji: "🕊️",
     desc: "Mail club bất ngờ",
   },

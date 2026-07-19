@@ -2,6 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { ShopContext } from "../context/ShopContext";
 
+const statusColor = {
+  "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
+  "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
+  "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
+  "Đã hủy": "bg-gray-100 text-gray-400",
+};
+
 const Profile = () => {
   const { user, updateProfile } = useAuth();
   const { products } = useContext(ShopContext);
@@ -24,6 +31,56 @@ const Profile = () => {
     }
   }, [user]);
 
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
+
+  const handleSetPassword = async () => {
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      setPasswordError("Mật khẩu xác nhận không khớp");
+      return;
+    }
+    if (passwordForm.newPassword.length < 6) {
+      setPasswordError("Mật khẩu phải có ít nhất 6 ký tự");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:4000/api/auth/set-password", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          currentPassword: passwordForm.currentPassword,
+          newPassword: passwordForm.newPassword,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPasswordSuccess(true);
+        setPasswordForm({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+        setPasswordError("");
+        setTimeout(() => {
+          setPasswordSuccess(false);
+          setShowPasswordForm(false);
+        }, 2000);
+      } else {
+        setPasswordError(data.message);
+      }
+    } catch {
+      setPasswordError("Không thể kết nối server");
+    }
+  };
+
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [orders, setOrders] = useState([]);
@@ -32,7 +89,7 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState("profile");
 
   // Load đơn hàng
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchOrders = async () => {
       try {
         const res = await fetch("http://localhost:4000/api/orders/my-orders", {
@@ -74,13 +131,6 @@ const Profile = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const statusColor = {
-    "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
-    "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
-    "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
-    "Đã hủy": "bg-gray-100 text-gray-400",
   };
 
   return (

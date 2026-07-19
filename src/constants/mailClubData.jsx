@@ -1,0 +1,50 @@
+export const MONTHS = [
+  "Tháng 1",
+  "Tháng 2",
+  "Tháng 3",
+  "Tháng 4",
+  "Tháng 5",
+  "Tháng 6",
+  "Tháng 7",
+  "Tháng 8",
+  "Tháng 9",
+  "Tháng 10",
+  "Tháng 11",
+  "Tháng 12",
+];
+
+export const PLANS = [
+  {
+    id: "monthly",
+    label: "Gói Tháng",
+    emoji: "🌸",
+    price: "135,000đ",
+    duration: "1 tháng",
+    benefits: [
+      "1 mail club handmade mỗi tháng",
+      "3-5 sản phẩm độc quyền",
+      "Bưu thiếp viết tay từ momo",
+      "Freeship toàn quốc",
+    ],
+    bg: "bg-[#FFD6E0]",
+    border: "border-[#FFB7C5]",
+  },
+  {
+    id: "quarterly",
+    label: "Gói Quý",
+    emoji: "🎀",
+    price: "364,500đ",
+    duration: "3 tháng",
+    benefits: [
+      "3 hộp quà handmade mỗi quý",
+      "Tiết kiệm hơn so với gói tháng",
+      "Quà tặng đặc biệt tháng đầu",
+      "Bưu thiếp viết tay từ momo",
+      "Freeship toàn quốc",
+      "Ưu tiên sản phẩm limited",
+    ],
+    bg: "bg-[#E8E4F5]",
+    border: "border-[#8B98E3]",
+    recommended: true,
+  },
+];

@@ -150,7 +150,8 @@ const Login = () => {
             {/* Google */}
             <button
               onClick={loginWithGoogle}
-              className="w-full flex items-center justify-center gap-3 border border-[#FFD6E0] py-3 rounded-2xl text-sm text-[#4A4A6A] hover:bg-[#FFF0F5] transition-colors"
+              disabled={true}
+              className="disable w-full flex items-center justify-center gap-3 border border-[#FFD6E0] py-3 rounded-2xl text-sm text-[#4A4A6A] hover:bg-[#FFF0F5] transition-colors"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path

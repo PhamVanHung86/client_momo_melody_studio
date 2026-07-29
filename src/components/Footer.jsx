@@ -40,7 +40,9 @@ const Footer = () => {
               {/* Facebook */}
               <a
                 href="https://www.facebook.com/hieu.nguyenthi.1447"
-                className="flex items-center gap-2 px-2.5 py-2.5 rounded-2xl border-2 border-[#4A4A6A]/15 hover:border-[#8B98E3] transition-colors text-[11px] sm:text-sm font-medium flex-1 sm:flex-initial justify-center whitespace-nowra"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-2.5 py-2.5 rounded-2xl border-2 border-[#4A4A6A]/15 hover:border-[#8B98E3] transition-colors text-[11px] sm:text-sm font-medium flex-1 sm:flex-initial justify-center whitespace-nowrap"
               >
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
@@ -55,7 +57,9 @@ const Footer = () => {
               {/* Instagram */}
               <a
                 href="https://www.instagram.com/momo_meomeow"
-                className="flex items-center gap-2 px-2.5 py-2.5 rounded-2xl border-2 border-[#4A4A6A]/15 hover:border-[#8B98E3] transition-colors text-[11px] sm:text-sm font-medium flex-1 sm:flex-initial justify-center whitespace-nowra"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-2.5 py-2.5 rounded-2xl border-2 border-[#4A4A6A]/15 hover:border-[#8B98E3] transition-colors text-[11px] sm:text-sm font-medium flex-1 sm:flex-initial justify-center whitespace-nowrap"
               >
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
@@ -80,11 +84,13 @@ const Footer = () => {
 
               {/* Threads */}
               <a
-                href="https://www.threads.com/@momo_meomeow"
-                className="flex items-center gap-2 px-2.5 py-2.5 rounded-2xl border-2 border-[#4A4A6A]/15 hover:border-[#8B98E3] transition-colors text-[11px] sm:text-sm font-medium flex-1 sm:flex-initial justify-center whitespace-nowra"
+                href="https://www.threads.net/@momo_meomeow"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-2.5 py-2.5 rounded-2xl border-2 border-[#4A4A6A]/15 hover:border-[#8B98E3] transition-colors text-[11px] sm:text-sm font-medium flex-1 sm:flex-initial justify-center whitespace-nowrap"
               >
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5flex-shrink-0"
+                  className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="#4A4A6A"
                 >

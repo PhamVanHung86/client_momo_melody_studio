@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../api/client";
 
 const statusColor = {
+  "Đã xác nhận": "bg-[#C9A0FF] text-[#4A4A6A]",
   "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
   "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
   "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
@@ -15,7 +17,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/orders/my-orders", {
+        const res = await fetch(apiUrl("/api/orders/my-orders"), {
           credentials: "include",
         });
         const data = await res.json();

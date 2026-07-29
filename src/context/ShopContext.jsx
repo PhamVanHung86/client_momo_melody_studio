@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { apiUrl } from "../api/client";
 
 export const ShopContext = createContext();
 
@@ -13,7 +14,7 @@ const ShopContextProvider = (props) => {
   // Lấy sản phẩm từ API
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/products");
+      const res = await fetch(apiUrl("/api/products"));
       const data = await res.json();
       if (data.success) {
         // Map "images" (DB) → "image" (code cũ đang dùng)
@@ -36,7 +37,7 @@ const ShopContextProvider = (props) => {
 
   const fetchFlashSale = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/flash-sales/active");
+      const res = await fetch(apiUrl("/api/flash-sales/active"));
       const data = await res.json();
       if (data.success && data.flashSale) setFlashSale(data.flashSale);
     } catch (err) {

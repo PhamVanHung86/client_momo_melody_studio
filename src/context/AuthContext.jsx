@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { apiUrl } from "../api/client";
 
 export const AuthContext = createContext();
 
@@ -13,7 +14,7 @@ const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/me", {
+      const res = await fetch(apiUrl("/api/auth/me"), {
         credentials: "include",
       });
       const data = await res.json();
@@ -26,7 +27,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
-    const res = await fetch("http://localhost:4000/api/auth/register", {
+    const res = await fetch(apiUrl("/api/auth/register"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -38,7 +39,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const res = await fetch("http://localhost:4000/api/auth/login", {
+    const res = await fetch(apiUrl("/api/auth/login"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -50,11 +51,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:4000/api/auth/google";
+    window.location.href = apiUrl("/api/auth/google");
   };
 
   const logout = async () => {
-    await fetch("http://localhost:4000/api/auth/logout", {
+    await fetch(apiUrl("/api/auth/logout"), {
       method: "POST",
       credentials: "include",
     });
@@ -63,7 +64,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateProfile = async (formData) => {
-    const res = await fetch("http://localhost:4000/api/auth/profile", {
+    const res = await fetch(apiUrl("/api/auth/profile"), {
       method: "PUT",
       credentials: "include",
       body: formData,

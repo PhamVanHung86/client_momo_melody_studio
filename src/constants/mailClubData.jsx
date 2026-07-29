@@ -36,7 +36,7 @@ export const PLANS = [
     price: "364,500đ",
     duration: "3 tháng",
     benefits: [
-      "3 hộp quà handmade mỗi quý",
+      "3 Mail club handmade mỗi quý",
       "Tiết kiệm hơn so với gói tháng",
       "Quà tặng đặc biệt tháng đầu",
       "Bưu thiếp viết tay từ momo",

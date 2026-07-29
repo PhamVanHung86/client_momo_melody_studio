@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,117 +13,204 @@ const slides = [
     title: "Phone Charms",
     desc: "Những chiếc charm xinh xắn làm thủ công, biến điện thoại của bạn thành tác phẩm nghệ thuật mang đậm dấu ấn cá nhân.",
     link: "/phone-charms",
+    badge: "✨ Hot Trend 2026",
+    tabColor: "bg-[#FFB7C5]",
+    tapeColor: "bg-[#FFC2D1]/80",
+    stampText: "MOMO 2026",
   },
   {
     img: assets.hero_3,
     tag: "Handmade",
     title: "Keychain",
-    desc: "Móc khóa và ghim cài áo độc đáo — người bạn đồng hành của mọi chuyến đi.",
+    desc: "Móc khóa và ghim cài áo độc đáo — người bạn đồng hành đáng yêu trên mọi chuyến đi.",
     link: "/keychain",
+    badge: "🎀 100% Thủ Công",
+    tabColor: "bg-[#B8DEFF]",
+    tapeColor: "bg-[#B8DEFF]/80",
+    stampText: "HAND MADE",
   },
   {
     img: assets.hero_1,
-    tag: "Limited",
+    tag: "Limited Edition",
     title: "Stickers & Postcards",
-    desc: "Sticker cute và bưu thiếp vẽ tay — gửi gắm yêu thương qua từng nét vẽ.",
+    desc: "Sticker cute và bưu thiếp vẽ tay — gửi gắm yêu thương ngọt ngào qua từng nét vẽ.",
     link: "/stickers",
+    badge: "🎨 Vẽ Tay Độc Quyền",
+    tabColor: "bg-[#FFE082]",
+    tapeColor: "bg-[#FFE082]/80",
+    stampText: "ART PRINT",
   },
   {
     img: assets.hero_7,
     tag: "Bestseller",
     title: "Mail Club",
-    desc: "Hộp thư bất ngờ hàng tháng — mỗi tháng một bộ sưu tập handmade độc quyền.",
-    link: "/mail-clup",
+    desc: "Hộp thư bất ngờ hàng tháng — mỗi tháng một bộ sưu tập handmade giới hạn đặc biệt.",
+    link: "/mail-club",
+    badge: "💌 Surprise Box",
+    tabColor: "bg-[#C8E6C9]",
+    tapeColor: "bg-[#C8E6C9]/80",
+    stampText: "MAIL CLUB",
   },
   {
     img: assets.home_7,
     tag: "Momo's Studio",
-    title: "momo's melody studio",
-    desc: "Tất cả đều được làm thủ công tỉ mỉ với tất cả tình yêu thương.",
+    title: "Momo's Melody",
+    desc: "Tất cả sản phẩm đều được chăm chút tỉ mỉ với tất cả tình yêu thương gửi tới bạn.",
     link: "/collection",
+    badge: "💖 Made With Love",
+    tabColor: "bg-[#E1BEE7]",
+    tapeColor: "bg-[#E1BEE7]/80",
+    stampText: "WITH LOVE",
   },
 ];
 
 const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef(null);
+
+  const handleTabClick = (index) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideToLoop(index);
+    }
+  };
 
   return (
-    <div className="w-full bg-[url('/images/bg-mobile.jpg')] bg-cover bg-center bg-no-repeat">
-      <div className="max-w-8xl mx-auto px-8 md:px-16 lg:px-24 py-0 flex flex-col md:flex-row items-center min-h-[88vh]">
-        {/* Trái: Text — 40% */}
-        <div className="w-full md:w-[40%] flex flex-col gap-5 py-12 md:py-0 pr-0 md:pr-8 pl-16">
-          {/* Tag */}
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-[1.5px] bg-[#FFB7C5]" />
-            <span className="text-[11px] text-[#4A4A6A]/50 font-medium uppercase tracking-[0.2em]">
-              {slides[activeIndex].tag}
-            </span>
+    <div className="relative w-full min-h-[88vh] bg-[url('/images/bg-mobile.jpg')] bg-no-repeat bg-cover bg:content py-10 md:py-16 px-4 sm:px-8 flex items-center justify-center overflow-hidden">
+      {/* 🌸 Các phần tử trang trí bồng bềnh xung quanh bàn làm việc */}
+      <div className="absolute top-12 right-12 text-3xl animate-bounce duration-[4000ms] opacity-70 select-none pointer-events-none -rotate-12">
+        <img
+          src="/logo_red.png"
+          alt="Logo"
+          className="w-10 h-10 object-contain drop-shadow-sm"
+        />
+      </div>
+      {/* 📖 BÌA SỔ CHÍNH (OPEN JOURNAL / BINDER) */}
+      <div className="relative max-w-5xl w-full mx-auto my-auto flex flex-col md:flex-row items-stretch bg-[#FFFDF9] bg-[radial-gradient(#E8DFD1_1px,transparent_1px)] [background-size:18px_18px] rounded-3xl shadow-[0_20px_50px_rgba(74,74,106,0.12)] border-2 border-[#F0E6D8] p-6 sm:p-10 md:p-12">
+        {/* 📚 THẺ ĐÁNH DẤU TRANG STICKY TABS (Nhô ra ở cạnh phải) */}
+        <div className="absolute -right-3 md:-right-5 top-12 flex flex-col gap-3 z-30">
+          {slides.map((slide, i) => (
+            <button
+              key={i}
+              onClick={() => handleTabClick(i)}
+              className={`px-3 py-1.5 md:py-2 text-[10px] md:text-xs font-bold text-[#4A4A6A] rounded-r-xl border-y border-r border-[#4A4A6A]/10 shadow-sm transition-all duration-300 flex items-center gap-1 ${
+                slide.tabColor
+              } ${
+                activeIndex === i
+                  ? "translate-x-1.5 shadow-md scale-105 font-black text-[#2B2B42]"
+                  : "opacity-70 hover:opacity-100 hover:translate-x-1"
+              }`}
+            >
+              <span>0{i + 1}</span>
+              <span className="hidden lg:inline-block max-w-[80px] truncate">
+                {slide.title}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* 📝 TRANG SỔ TRÁI: NỘI DUNG VĂN BẢN (Page 1) */}
+        <div className="w-full md:w-1/2 flex flex-col justify-between gap-6 pr-0 md:pr-8 z-10">
+          <div key={activeIndex} className="space-y-4 animate-fadeIn">
+            {/* Tag Thẻ Tape dán góc */}
+            <div className="inline-flex items-center gap-2 bg-[#FF85A1]/15 text-[#FF85A1] border border-[#FF85A1]/30 px-3.5 py-1 rounded-md text-[11px] font-black uppercase tracking-wider -rotate-1 shadow-sm">
+              <span>📌</span>
+              <span>{slides[activeIndex].tag}</span>
+            </div>
+
+            {/* Tiêu đề viết tay dạng Nhật Ký */}
+            <h1
+              style={{ fontFamily: "'Dancing Script', cursive" }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#4A4A6A] leading-tight"
+            >
+              {slides[activeIndex].title}
+            </h1>
+
+            {/* Dòng kẻ tay trang trí */}
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-[2px] bg-[#FF85A1]" />
+              <div className="w-2 h-[2px] bg-[#FFB7C5]" />
+              <div className="w-2 h-[2px] bg-[#FFD6E0]" />
+            </div>
+
+            {/* Đoạn mô tả mộc mạc */}
+            <p className="text-sm md:text-base text-[#4A4A6A]/80 font-normal leading-relaxed">
+              {slides[activeIndex].desc}
+            </p>
           </div>
 
-          {/* Tiêu đề */}
-          <h1
-            style={{ fontFamily: "'Dancing Script', cursive" }}
-            className="text-[3.5rem] md:text-[4rem] lg:text-[5rem] text-[#4A4A6A] font-normal leading-[1.1]"
-          >
-            {slides[activeIndex].title}
-          </h1>
-
-          {/* Divider */}
-          <div className="w-10 h-[2px] bg-[#FFB7C5] rounded-full" />
-
-          {/* Mô tả */}
-          <p className="text-[13px] md:text-sm text-white leading-relaxed">
-            {slides[activeIndex].desc}
-          </p>
-
-          {/* Buttons */}
-          <div className="flex items-center gap-5 mt-1">
+          {/* Cụm Action Buttons & Dấu Tem Vintage */}
+          <div className="flex items-center justify-between gap-4 pt-2">
             <Link
               to={slides[activeIndex].link}
-              className="inline-flex items-center gap-2 bg-[#4A4A6A] text-white text-[11px] font-semibold px-6 py-3 rounded-full hover:bg-[#FFB7C5] transition-all duration-300 shadow-md active:scale-95 uppercase tracking-[0.15em]"
+              className="inline-flex items-center gap-2 bg-[#4A4A6A] hover:bg-[#FF85A1] text-white text-xs font-bold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wider"
             >
-              Khám phá ngay →
+              <span>Khám phá ngay</span>
+              <span>→</span>
             </Link>
-            <Link
-              to="/collection"
-              className="text-[11px] text-[#4A4A6A]/40 hover:text-[#FFB7C5] transition-colors underline underline-offset-4 tracking-wide"
-            >
-              Xem tất cả
-            </Link>
+
+            {/* Dấu tem tròn Vintage (Postal Stamp) */}
+            <div className="hidden sm:flex w-14 h-14 rounded-full border-2 border-dashed border-[#FF85A1]/50 items-center justify-center rotate-12 p-1 text-center bg-white/60 shadow-sm pointer-events-none">
+              <span className="text-[8px] font-black tracking-widest text-[#FF85A1] uppercase leading-tight">
+                {slides[activeIndex].stampText}
+              </span>
+            </div>
           </div>
 
-          {/* Dots */}
-          <div className="flex gap-2 mt-3">
+          {/* Phân trang dạng chấm nhỏ ở góc trang sổ */}
+          <div className="flex items-center gap-2 pt-2">
             {slides.map((_, i) => (
-              <div
+              <button
                 key={i}
-                className={`rounded-full transition-all duration-300 ${
+                onClick={() => handleTabClick(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${
                   activeIndex === i
-                    ? "w-5 h-[7px] bg-[#FFB7C5]"
-                    : "w-[7px] h-[7px] bg-[#4A4A6A]/15"
+                    ? "w-6 bg-[#FF85A1]"
+                    : "w-2 bg-[#4A4A6A]/20 hover:bg-[#FF85A1]/40"
                 }`}
               />
             ))}
           </div>
         </div>
 
-        {/* Phải: Ảnh — 60% */}
-        <div className="w-full md:w-[55%] h-full flex items-right justify-end py-4 md:py-10">
-          <div className="relative w-full">
-            {/* Blob trang trí */}
-            <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#FFD6E0]/30 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-6 right-20 w-32 h-32 bg-[#B8DEFF]/30 rounded-full blur-3xl pointer-events-none" />
+        {/* 🔗 GÁY LÒ XO GIỮA SỔ (SPIRAL BINDER RINGS) */}
+        <div className="hidden md:flex flex-col justify-between items-center h-[90%] my-auto w-6 py-2 relative z-20 -mx-3 pointer-events-none">
+          {[...Array(7)].map((_, idx) => (
+            <div
+              key={idx}
+              className="w-8 h-3 bg-gradient-to-r from-gray-300 via-gray-100 to-gray-400 rounded-full shadow-md border border-gray-300/80 flex items-center justify-between px-1"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-gray-700/50 shadow-inner" />
+              <div className="w-1.5 h-1.5 rounded-full bg-gray-700/50 shadow-inner" />
+            </div>
+          ))}
+        </div>
 
-            {/* Swiper */}
+        {/* 🖼️ TRANG SỔ PHẢI: KHUNG ẢNH POLAROID & WASHI TAPE (Page 2) */}
+        <div className="w-full md:w-1/2 flex items-center justify-center pl-0 md:pl-8 pt-8 md:pt-0 z-10">
+          <div className="relative w-full max-w-[380px] bg-white p-3 sm:p-4 rounded-2xl border border-[#E8DFD1] shadow-xl rotate-1 transition-transform hover:rotate-0 duration-500">
+            {/* 🩹 Đoạn Băng Dính Washi Tape đè lên đầu bức ảnh */}
+            <div
+              className={`absolute -top-3 left-1/2 -translate-x-1/2 z-30 w-28 h-6 ${slides[activeIndex].tapeColor} backdrop-blur-sm -rotate-2 border-y border-white/60 shadow-sm opacity-90`}
+              style={{
+                clipPath: "polygon(0% 0%, 100% 0%, 96% 100%, 4% 100%)",
+              }}
+            />
+
+            {/* Tag Badge Nổi ở góc ảnh */}
+            <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md text-[#4A4A6A] text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-[#FFD6E0]">
+              {slides[activeIndex].badge}
+            </div>
+
+            {/* Swiper Slider ảnh sản phẩm */}
             <Swiper
               modules={[Autoplay, EffectFade]}
               effect="fade"
               loop={true}
               autoplay={{ delay: 4000, disableOnInteraction: false }}
-              speed={1000}
+              speed={800}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-              className="w-full rounded-2xl overflow-hidden shadow-xl shadow-[#4A4A6A]/10"
-              style={{ aspectRatio: "16/10" }}
+              className="w-full aspect-[4/3] sm:aspect-[1/1] rounded-xl overflow-hidden bg-[#FFF0F5]"
             >
               {slides.map((slide, i) => (
                 <SwiperSlide key={i}>
@@ -136,17 +223,17 @@ const Hero = () => {
               ))}
             </Swiper>
 
-            {/* Badge */}
-            <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-md">
-              <p className="text-[9px] text-[#4A4A6A]/40 uppercase tracking-wider">
-                Handmade with love
-              </p>
-              <p
+            {/* Ghi chú chân ảnh kiểu Sổ Tay */}
+            <div className="flex items-center justify-between pt-3 px-1">
+              <span className="text-[10px] font-mono text-[#4A4A6A]/50 uppercase tracking-wider">
+                PAGE 0{activeIndex + 1} / 05
+              </span>
+              <span
                 style={{ fontFamily: "'Dancing Script', cursive" }}
-                className="text-sm text-[#4A4A6A] mt-0.5"
+                className="text-sm font-bold text-[#FF85A1]"
               >
-                momo's melody 🩷
-              </p>
+                Momo's Journal 💖
+              </span>
             </div>
           </div>
         </div>

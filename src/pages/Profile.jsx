@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { ShopContext } from "../context/ShopContext";
+import { apiUrl } from "../api/client";
 
 const statusColor = {
+  "Đã xác nhận": "bg-[#C9A0FF] text-[#4A4A6A]",
   "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
   "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
   "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
@@ -27,7 +29,7 @@ const Profile = () => {
         phone: user.phone || "",
         address: user.address || "",
       });
-      console.log("Check user: ", user);
+      //console.log("Check user: ", user);
     }
   }, [user]);
 
@@ -51,7 +53,7 @@ const Profile = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/set-password", {
+      const res = await fetch(apiUrl("/api/auth/set-password"), {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -92,7 +94,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/orders/my-orders", {
+        const res = await fetch(apiUrl("/api/orders/my-orders"), {
           credentials: "include",
         });
         const data = await res.json();
@@ -213,7 +215,8 @@ const Profile = () => {
                     <img
                       src={avatarPreview || user.avatar}
                       className="w-16 h-16 rounded-full object-cover ring-4 ring-[#FFD6E0]"
-                      alt={user?.name}
+                      alt={user?.name || "User Avatar"}
+                      referrerPolicy="no-referrer"
                     />
                   ) : (
                     <div className="w-16 h-16 rounded-full bg-[#FFD6E0] flex items-center justify-center text-xl font-medium text-[#4A4A6A]">
@@ -236,7 +239,8 @@ const Profile = () => {
                     <img
                       src={user.avatar}
                       className="w-16 h-16 rounded-full object-cover ring-4 ring-[#FFD6E0]"
-                      alt={user?.name}
+                      alt={user?.name || "User Avatar"}
+                      referrerPolicy="no-referrer"
                     />
                   ) : (
                     <div className="w-16 h-16 rounded-full bg-[#FFD6E0] flex items-center justify-center text-xl font-medium text-[#4A4A6A]">
@@ -354,6 +358,120 @@ const Profile = () => {
             >
               ✏️ Chỉnh sửa thông tin
             </button>
+          )}
+          {/* Đổi/Set mật khẩu */}
+          {!editing && (
+            <div className="border-t border-[#FFD6E0]/50 pt-4 mt-2">
+              {!showPasswordForm ? (
+                <button
+                  onClick={() => setShowPasswordForm(true)}
+                  className="w-full py-2.5 rounded-2xl border border-[#FFD6E0] text-sm text-[#4A4A6A]/60 hover:bg-[#FFF0F5] transition-colors"
+                >
+                  🔑{" "}
+                  {user?.hasPassword
+                    ? "Đổi mật khẩu"
+                    : "Tạo mật khẩu để đăng nhập bằng email"}
+                </button>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <p className="text-xs font-semibold text-[#4A4A6A]/50 uppercase tracking-wider">
+                    {user?.hasPassword ? "Đổi mật khẩu" : "Tạo mật khẩu mới"}
+                  </p>
+
+                  {passwordSuccess && (
+                    <div className="bg-[#D4F4DD] text-green-600 text-xs px-4 py-2 rounded-xl text-center">
+                      ✓ Cập nhật mật khẩu thành công!
+                    </div>
+                  )}
+
+                  {passwordError && (
+                    <div className="bg-red-50 text-red-500 text-xs px-4 py-2 rounded-xl text-center">
+                      {passwordError}
+                    </div>
+                  )}
+
+                  {/* Chỉ hiện nếu đã có password */}
+                  {user?.hasPassword && (
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs text-[#4A4A6A]/60">
+                        Mật khẩu hiện tại
+                      </label>
+                      <input
+                        type="password"
+                        value={passwordForm.currentPassword}
+                        onChange={(e) =>
+                          setPasswordForm({
+                            ...passwordForm,
+                            currentPassword: e.target.value,
+                          })
+                        }
+                        placeholder="••••••••"
+                        className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs text-[#4A4A6A]/60">
+                      Mật khẩu mới
+                    </label>
+                    <input
+                      type="password"
+                      value={passwordForm.newPassword}
+                      onChange={(e) =>
+                        setPasswordForm({
+                          ...passwordForm,
+                          newPassword: e.target.value,
+                        })
+                      }
+                      placeholder="Ít nhất 6 ký tự"
+                      className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs text-[#4A4A6A]/60">
+                      Xác nhận mật khẩu mới
+                    </label>
+                    <input
+                      type="password"
+                      value={passwordForm.confirmPassword}
+                      onChange={(e) =>
+                        setPasswordForm({
+                          ...passwordForm,
+                          confirmPassword: e.target.value,
+                        })
+                      }
+                      placeholder="Nhập lại mật khẩu mới"
+                      className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                    />
+                  </div>
+
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => {
+                        setShowPasswordForm(false);
+                        setPasswordForm({
+                          currentPassword: "",
+                          newPassword: "",
+                          confirmPassword: "",
+                        });
+                        setPasswordError("");
+                      }}
+                      className="flex-1 py-3 rounded-2xl border border-[#FFD6E0] text-sm text-[#4A4A6A] hover:bg-[#FFF0F5]"
+                    >
+                      Hủy
+                    </button>
+                    <button
+                      onClick={handleSetPassword}
+                      className="flex-1 py-3 rounded-2xl bg-[#FFB7C5] text-white text-sm font-semibold hover:bg-[#ff9db5]"
+                    >
+                      {user?.hasPassword ? "Đổi mật khẩu" : "Tạo mật khẩu"} 🔑
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </div>
       )}

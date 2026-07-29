@@ -27,6 +27,15 @@ export default {
         prata: ["Prata", "serif"],
         urbanist: ["Urbanist", "sans-serif"],
       },
+      keyframes: {
+        cartBounce: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.3)" },
+        },
+      },
+      animation: {
+        "cart-bounce": "cartBounce 0.35s ease-in-out",
+      },
     },
   },
   plugins: [],

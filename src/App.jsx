@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
@@ -30,6 +32,17 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="light"
+        toastClassName="!rounded-2xl !font-medium !text-sm"
+        style={{ zIndex: 9999 }}
+      />
       <ScrollRestoration />
       <AnimatePresence mode="wait">
         <Routes>

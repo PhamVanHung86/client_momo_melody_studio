@@ -26,6 +26,8 @@ import ScrollRestoration from "./components/ScrollRestoration";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import AuthCallback from "./pages/AuthCallback";
+import Wishlist from "./pages/Wishlist";
 
 const App = () => {
   const location = useLocation();
@@ -49,6 +51,8 @@ const App = () => {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="wishlist" element={<Wishlist />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/about" element={<About />} />
           <Route path="cart" element={<Cart />} />

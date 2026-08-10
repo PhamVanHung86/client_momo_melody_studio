@@ -3,7 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
+import ProductReviews from "../components/ProductReviews";
 import { flyToCart } from "../utils/flyToCart";
+import { cldUrl } from "../utils/cldUrl";
 import SEO from "../components/SEO";
 
 const Product = () => {
@@ -59,6 +61,32 @@ const Product = () => {
           }
           image={product.image?.[0]}
           url={`/product/${product._id}`}
+          structuredData={{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: product.name,
+            description: product.description || product.name,
+            image: product.image,
+            offers: {
+              "@type": "Offer",
+              price: salePrice,
+              priceCurrency: "VND",
+              availability:
+                product.stock > 0
+                  ? "https://schema.org/InStock"
+                  : "https://schema.org/OutOfStock",
+              url: `https://momomelody.vn/product/${product._id}`,
+            },
+            // Chỉ thêm aggregateRating nếu đã có review — Google phạt SEO
+            // nếu khai báo rating giả/rỗng.
+            ...(product.ratingCount > 0 && {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: product.ratingAvg,
+                reviewCount: product.ratingCount,
+              },
+            }),
+          }}
         />
       )}
 
@@ -85,9 +113,10 @@ const Product = () => {
           <div className="relative bg-[#FFF0F5] rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-4 border border-[#FFD6E0]/50 shadow-inner group">
             <img
               ref={imgRef}
-              src={mainImage}
+              src={cldUrl(mainImage, { width: 800 })}
               alt={product.name}
               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
+              decoding="async"
             />
 
             {/* Badges Phân Loại */}
@@ -128,9 +157,11 @@ const Product = () => {
                   }`}
                 >
                   <img
-                    src={img}
+                    src={cldUrl(img, { width: 150 })}
                     alt=""
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </button>
               ))}
@@ -248,6 +279,13 @@ const Product = () => {
           </div>
         </div>
       </div>
+
+      {/* ⭐ ĐÁNH GIÁ SẢN PHẨM */}
+      <ProductReviews
+        productId={product._id}
+        ratingAvg={product.ratingAvg || 0}
+        ratingCount={product.ratingCount || 0}
+      />
 
       {/* 🌸 SẢN PHẨM LIÊN QUAN */}
       <div className="mt-12">

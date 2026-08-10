@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import qrCode from "../assets/qr-code.png";
 import { toast } from "react-toastify";
 import LoadingStatusModal from "../components/LoadingStatusModal";
-import { apiUrl } from "../api/client";
+import { apiFetch } from "../api/client";
 
 const PlaceOrder = () => {
   const {
@@ -64,10 +64,8 @@ const PlaceOrder = () => {
       const shippingFee = subtotal >= 300000 ? 0 : delivery_fee;
       const total = subtotal + shippingFee;
 
-      const res = await fetch(apiUrl("/api/orders"), {
+      const res = await apiFetch("/api/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           items,
           shippingInfo: form,

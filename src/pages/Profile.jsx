@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { ShopContext } from "../context/ShopContext";
-import { apiUrl } from "../api/client";
+import { apiFetch } from "../api/client";
+import { cldUrl } from "../utils/cldUrl";
 
 const statusColor = {
   "Đã xác nhận": "bg-[#C9A0FF] text-[#4A4A6A]",
@@ -53,10 +54,8 @@ const Profile = () => {
     }
 
     try {
-      const res = await fetch(apiUrl("/api/auth/set-password"), {
+      const res = await apiFetch("/api/auth/set-password", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           currentPassword: passwordForm.currentPassword,
           newPassword: passwordForm.newPassword,
@@ -94,9 +93,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch(apiUrl("/api/orders/my-orders"), {
-          credentials: "include",
-        });
+        const res = await apiFetch("/api/orders/my-orders");
         const data = await res.json();
         if (data.success) setOrders(data.orders);
       } catch (err) {
@@ -213,7 +210,7 @@ const Profile = () => {
                 <label className="cursor-pointer">
                   {avatarPreview || user?.avatar ? (
                     <img
-                      src={avatarPreview || user.avatar}
+                      src={avatarPreview || cldUrl(user.avatar, { width: 100 })}
                       className="w-16 h-16 rounded-full object-cover ring-4 ring-[#FFD6E0]"
                       alt={user?.name || "User Avatar"}
                       referrerPolicy="no-referrer"
@@ -237,7 +234,7 @@ const Profile = () => {
                 <>
                   {user?.avatar ? (
                     <img
-                      src={user.avatar}
+                      src={cldUrl(user.avatar, { width: 100 })}
                       className="w-16 h-16 rounded-full object-cover ring-4 ring-[#FFD6E0]"
                       alt={user?.name || "User Avatar"}
                       referrerPolicy="no-referrer"

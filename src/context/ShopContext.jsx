@@ -1,15 +1,20 @@
 import { createContext, useState, useEffect } from "react";
-import { apiUrl } from "../api/client";
+import { apiUrl, apiFetch } from "../api/client";
+import { useAuth } from "./AuthContext";
 
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "VND";
   const delivery_fee = 20000;
+  const { user } = useAuth();
 
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [flashSale, setFlashSale] = useState(null);
+  // ❤️ Wishlist — chỉ lưu mảng ID để check nhanh (Set-like), danh sách đầy
+  // đủ (có ảnh, giá...) chỉ load khi vào hẳn trang Wishlist.
+  const [wishlistIds, setWishlistIds] = useState([]);
 
   // Lấy sản phẩm từ API
   const fetchProducts = async () => {
@@ -48,6 +53,47 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     fetchFlashSale();
   }, []);
+
+  // Nạp wishlist khi user đăng nhập, xoá khi đăng xuất
+  useEffect(() => {
+    if (!user) {
+      setWishlistIds([]);
+      return;
+    }
+    const fetchWishlist = async () => {
+      try {
+        const res = await apiFetch("/api/wishlist");
+        const data = await res.json();
+        if (data.success) setWishlistIds(data.products.map((p) => p._id));
+      } catch (err) {
+        console.error("Lỗi lấy wishlist:", err);
+      }
+    };
+    fetchWishlist();
+  }, [user]);
+
+  const isInWishlist = (productId) => wishlistIds.includes(productId);
+
+  const toggleWishlist = async (productId) => {
+    if (!user) return { needLogin: true };
+    try {
+      const res = await apiFetch(`/api/wishlist/${productId}/toggle`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        setWishlistIds((prev) =>
+          data.inWishlist
+            ? [...prev, productId]
+            : prev.filter((id) => id !== productId),
+        );
+      }
+      return data;
+    } catch (err) {
+      console.error("Lỗi cập nhật wishlist:", err);
+      return { success: false };
+    }
+  };
 
   // Load cart từ localStorage
   const [cartItems, setCartItems] = useState(() => {
@@ -135,6 +181,9 @@ const ShopContextProvider = (props) => {
     fetchProducts,
     flashSale,
     getProductPrice,
+    wishlistIds,
+    isInWishlist,
+    toggleWishlist,
   };
 
   return (

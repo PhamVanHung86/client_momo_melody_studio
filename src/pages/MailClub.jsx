@@ -3,7 +3,8 @@ import { useAuth } from "../context/AuthContext";
 import qrCode from "../assets/qr-code.png";
 import { MONTHS, PLANS } from "../constants/mailClubData";
 import SEO from "../components/SEO";
-import { apiUrl } from "../api/client";
+import { apiUrl, apiFetch } from "../api/client";
+import { cldUrl } from "../utils/cldUrl";
 
 const MailClub = () => {
   const { user } = useAuth();
@@ -123,9 +124,7 @@ const MailClub = () => {
 
   const fetchMySubscription = async () => {
     try {
-      const res = await fetch(apiUrl("/api/mail-club/my"), {
-        credentials: "include",
-      });
+      const res = await apiFetch("/api/mail-club/my");
       const data = await res.json();
       if (data.success && data.subscription)
         setMySubscription(data.subscription);
@@ -236,9 +235,11 @@ const MailClub = () => {
                       onClick={() => setSelectedImage(currentTheme.menuImage)}
                     >
                       <img
-                        src={currentTheme.menuImage}
+                        src={cldUrl(currentTheme.menuImage, { width: 500 })}
                         alt="Menu tháng mới"
                         className="w-full aspect-[3/4] object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <div className="absolute inset-0 bg-black/10 flex items-end justify-center pb-3 opacity-100 md:opacity-0 hover:opacity-100 transition-opacity">
                         <span className="text-[10px] text-white bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">
@@ -271,9 +272,11 @@ const MailClub = () => {
                           <div className="bg-white p-2.5 md:p-3.5 pb-4 md:pb-6 rounded-xl md:rounded-2xl shadow-[0_8px_20px_rgba(0,0,0,0.04)] border border-[#FFD6E0]/40">
                             <div className="w-full aspect-square overflow-hidden rounded-lg md:rounded-xl bg-[#FAF6F8] mb-2.5">
                               <img
-                                src={img}
+                                src={cldUrl(img, { width: 350 })}
                                 alt={`Sản phẩm ${index + 1}`}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-108"
+                                loading="lazy"
+                                decoding="async"
                               />
                             </div>
                             <div className="text-center">
@@ -369,9 +372,11 @@ const MailClub = () => {
                                     <div className="bg-white p-2 md:p-3 pb-3.5 md:pb-5 rounded-xl md:rounded-2xl shadow-[0_6px_16px_rgba(0,0,0,0.03)] border border-[#FFD6E0]/40">
                                       <div className="w-full aspect-square overflow-hidden rounded-lg md:rounded-xl bg-[#FAF6F8] mb-2">
                                         <img
-                                          src={img}
+                                          src={cldUrl(img, { width: 300 })}
                                           alt={`Sản phẩm cũ ${index + 1}`}
                                           className="w-full h-full object-cover group-hover/card:scale-106 transition-transform duration-500"
+                                          loading="lazy"
+                                          decoding="async"
                                         />
                                       </div>
                                       <div className="text-center">
@@ -758,7 +763,7 @@ const MailClub = () => {
             className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center px-4"
           >
             <img
-              src={selectedImage}
+              src={cldUrl(selectedImage, { width: 1200 })}
               className="max-w-full max-h-[90vh] object-contain rounded-2xl"
               alt=""
             />

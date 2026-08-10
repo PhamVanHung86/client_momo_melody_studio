@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
-const SEO = ({ title, description, image, url }) => {
+const SEO = ({ title, description, image, url, structuredData }) => {
   const siteName = "momo's melody studio";
   const defaultDesc =
     "Những món đồ handmade nhỏ xinh được làm thủ công tỉ mỉ — phone charms, keychain, stickers, postcards & mail club.";
@@ -41,6 +41,15 @@ const SEO = ({ title, description, image, url }) => {
         name="keywords"
         content="handmade, phone charm, keychain, sticker, postcard, mail club, momo melody studio"
       />
+
+      {/* 🔍 Structured Data (schema.org) — giúp Google hiển thị rich
+          snippet (giá, rating, tình trạng còn hàng...) ngay trên kết quả
+          tìm kiếm thay vì chỉ có link + mô tả thường. */}
+      {structuredData && (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
     </Helmet>
   );
 };

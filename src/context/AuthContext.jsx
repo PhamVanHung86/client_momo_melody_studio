@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { apiUrl } from "../api/client";
+import { apiFetch, setTokens, getRefreshToken, removeToken } from "../api/client";
 
 export const AuthContext = createContext();
 
@@ -14,11 +14,10 @@ const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch(apiUrl("/api/auth/me"), {
-        credentials: "include",
-      });
+      const res = await apiFetch("/api/auth/me");
       const data = await res.json();
       if (data.success) setUser(data.user);
+      else removeToken(); // token hết hạn/không hợp lệ → dọn luôn
     } catch {
       setUser(null);
     } finally {
@@ -27,46 +26,52 @@ const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
-    const res = await fetch(apiUrl("/api/auth/register"), {
+    const res = await apiFetch("/api/auth/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify({ name, email, password }),
     });
     const data = await res.json();
-    if (data.success) setUser(data.user);
+    if (data.success) {
+      setTokens(data);
+      setUser(data.user);
+    }
     return data;
   };
 
   const login = async (email, password) => {
-    const res = await fetch(apiUrl("/api/auth/login"), {
+    const res = await apiFetch("/api/auth/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    if (data.success) setUser(data.user);
+    if (data.success) {
+      setTokens(data);
+      setUser(data.user);
+    }
     return data;
   };
 
   const loginWithGoogle = () => {
-    window.location.href = apiUrl("/api/auth/google");
+    window.location.href = `${
+      import.meta.env.VITE_API_URL || "http://localhost:4000"
+    }/api/auth/google`;
   };
 
   const logout = async () => {
-    await fetch(apiUrl("/api/auth/logout"), {
+    // Gửi kèm refreshToken để server thu hồi hẳn (không dùng lại được nữa),
+    // không chỉ đơn thuần xoá ở phía trình duyệt.
+    await apiFetch("/api/auth/logout", {
       method: "POST",
-      credentials: "include",
+      body: JSON.stringify({ refreshToken: getRefreshToken() }),
     });
+    removeToken();
     setUser(null);
     localStorage.removeItem("cartItems"); // ← xóa cart luôn
   };
 
   const updateProfile = async (formData) => {
-    const res = await fetch(apiUrl("/api/auth/profile"), {
+    const res = await apiFetch("/api/auth/profile", {
       method: "PUT",
-      credentials: "include",
       body: formData,
     });
     const data = await res.json();

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { cldUrl } from "../utils/cldUrl";
 
 const Cart = () => {
   const {
@@ -73,9 +74,11 @@ const Cart = () => {
                 {/* Ảnh */}
                 <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#FFF0F5] flex-shrink-0">
                   <img
-                    src={p.image[0]}
+                    src={cldUrl(p.image[0], { width: 150 })}
                     alt={p.name}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

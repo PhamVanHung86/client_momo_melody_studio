@@ -3,11 +3,23 @@ import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 // 🚚 Import hàm flyToCart từ file utils của bạn (Hãy kiểm tra lại đúng đường dẫn nhé)
 import { flyToCart } from "../utils/flyToCart";
+import { cldUrl } from "../utils/cldUrl";
 
 const ProductItem = ({ id, image, name, price, stock }) => {
-  const { currency, getProductPrice, addToCart } = useContext(ShopContext);
+  const { currency, getProductPrice, addToCart, isInWishlist, toggleWishlist } =
+    useContext(ShopContext);
   const imgRef = useRef(null); // Ref trỏ đến thẻ <img> để truyền trực tiếp vào flyToCart
   const isOutOfStock = stock === 0;
+  const isWished = isInWishlist(id);
+
+  const handleToggleWishlist = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const result = await toggleWishlist(id);
+    if (result?.needLogin) {
+      window.location.href = "/login";
+    }
+  };
 
   const salePrice = getProductPrice(id);
   const isOnSale = salePrice < price;
@@ -40,9 +52,10 @@ const ProductItem = ({ id, image, name, price, stock }) => {
           className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out ${
             isOutOfStock ? "opacity-50 grayscale" : ""
           }`}
-          src={imgUrl}
+          src={cldUrl(imgUrl, { width: 500 })}
           alt={name}
           loading="lazy"
+          decoding="async"
         />
 
         {/* 😿 Badge Hết hàng */}
@@ -60,6 +73,16 @@ const ProductItem = ({ id, image, name, price, stock }) => {
             Sale 🔥
           </span>
         )}
+
+        {/* ❤️ Nút yêu thích góc trên phải */}
+        <button
+          type="button"
+          onClick={handleToggleWishlist}
+          title={isWished ? "Bỏ khỏi yêu thích" : "Thêm vào yêu thích"}
+          className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-white/85 backdrop-blur-md flex items-center justify-center text-sm shadow-md z-10 transition-transform active:scale-90 hover:scale-110"
+        >
+          {isWished ? "❤️" : "🤍"}
+        </button>
 
         {/* ✨ Nút "Xem chi tiết" trượt lên khi hover (Nhấn vào sẽ chuyển sang trang chi tiết sản phẩm) */}
         {!isOutOfStock && (

@@ -19,7 +19,7 @@ const PlaceOrder = () => {
   } = useContext(ShopContext);
 
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, syncUser } = useAuth();
 
   // Tự điền từ profile
   const [form, setForm] = useState({
@@ -79,6 +79,7 @@ const PlaceOrder = () => {
       const data = await res.json();
 
       if (data.success) {
+        syncUser(data.user);
         //toast.success("Đặt hàng thành công! Cảm ơn bạn 💕");
         setSubmitted(true);
         clearCart();

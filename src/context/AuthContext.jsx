@@ -1,5 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { apiFetch, setTokens, getRefreshToken, removeToken } from "../api/client";
+import {
+  apiFetch,
+  setTokens,
+  getRefreshToken,
+  removeToken,
+} from "../api/client";
 
 export const AuthContext = createContext();
 
@@ -79,8 +84,9 @@ const AuthProvider = ({ children }) => {
     return data;
   };
 
-  // Thêm vào value:
-  // updateProfile,
+  const syncUser = (updatedUser) => {
+    if (updatedUser) setUser(updatedUser);
+  };
 
   return (
     <AuthContext.Provider
@@ -93,6 +99,7 @@ const AuthProvider = ({ children }) => {
         logout,
         checkAuth,
         updateProfile,
+        syncUser,
       }}
     >
       {children}

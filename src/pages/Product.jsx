@@ -18,6 +18,8 @@ const Product = () => {
   const [added, setAdded] = useState(false);
   const imgRef = useRef(null);
 
+  const REVIEWS_ENABLED = false;
+
   useEffect(() => {
     const found = products.find((p) => p._id === productId);
     if (found) {
@@ -281,11 +283,13 @@ const Product = () => {
       </div>
 
       {/* ⭐ ĐÁNH GIÁ SẢN PHẨM */}
-      <ProductReviews
-        productId={product._id}
-        ratingAvg={product.ratingAvg || 0}
-        ratingCount={product.ratingCount || 0}
-      />
+      {REVIEWS_ENABLED && (
+        <ProductReviews
+          productId={product._id}
+          ratingAvg={product.ratingAvg || 0}
+          ratingCount={product.ratingCount || 0}
+        />
+      )}
 
       {/* 🌸 SẢN PHẨM LIÊN QUAN */}
       <div className="mt-12">

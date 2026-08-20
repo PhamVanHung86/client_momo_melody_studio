@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // 🚚 Import hàm flyToCart từ file utils của bạn (Hãy kiểm tra lại đúng đường dẫn nhé)
 import { flyToCart } from "../utils/flyToCart";
 import { cldUrl } from "../utils/cldUrl";
+import FadeImage from "./FadeImage";
 
 const ProductItem = ({ id, image, name, price, stock }) => {
   const { currency, getProductPrice, addToCart, isInWishlist, toggleWishlist } =
@@ -47,15 +48,14 @@ const ProductItem = ({ id, image, name, price, stock }) => {
     >
       {/* 🖼️ KHUNG ẢNH & CHI TIẾT HOVER */}
       <div className="overflow-hidden rounded-2xl bg-[#FFF0F5] relative aspect-[3/4]">
-        <img
+        <FadeImage
           ref={imgRef}
           className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out ${
-            isOutOfStock ? "opacity-50 grayscale" : ""
+            isOutOfStock ? "grayscale" : ""
           }`}
+          targetOpacity={isOutOfStock ? 0.5 : 1}
           src={cldUrl(imgUrl, { width: 500 })}
           alt={name}
-          loading="lazy"
-          decoding="async"
         />
 
         {/* 😿 Badge Hết hàng */}

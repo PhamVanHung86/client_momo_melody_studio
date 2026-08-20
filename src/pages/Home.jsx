@@ -20,8 +20,17 @@ const Home = () => {
         <Hero />
         <ComingSoonBanner />
         <FlashSaleBanner />
-        <LatestCollection />
-        <CategoryGrid />
+
+        {/* Khung chứa Flexbox đổi thứ tự hiển thị */}
+        <div className="flex flex-col">
+          <div className="order-1 md:order-2">
+            <CategoryGrid />
+          </div>
+          <div className="order-2 md:order-1">
+            <LatestCollection />
+          </div>
+        </div>
+
         <PromoBanner />
       </AnimatePage>
     </div>

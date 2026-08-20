@@ -15,7 +15,7 @@ const LatestCollection = () => {
   }, [products]);
 
   return (
-    <div className="my-16 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+    <div className="sm:my-16 my-0 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       {/* Tiêu đề */}
       <div className="text-center py-8">
         <Title text1={"LATEST"} text2={"COLLECTIONS"} />

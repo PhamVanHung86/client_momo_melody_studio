@@ -8,15 +8,10 @@ const Login = () => {
 
   const { login, register, loginWithGoogle, user } = useAuth();
 
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(location.state?.intent !== "register");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Nếu đã đăng nhập thì về trang chủ
-  useEffect(() => {
-    if (user) navigate("/");
-  }, [user]);
 
   // Hiển thị lỗi Google OAuth
   useEffect(() => {
@@ -33,6 +28,11 @@ const Login = () => {
 
   // Lấy trang muốn vào trước đó
   const from = location.state?.from || "/";
+
+  // Nếu đã đăng nhập thì quay lại đúng trang trước đó (hoặc trang chủ)
+  useEffect(() => {
+    if (user) navigate(from, { replace: true });
+  }, [user]);
 
   // Thay navigate("/") thành:
   const handleSubmit = async () => {

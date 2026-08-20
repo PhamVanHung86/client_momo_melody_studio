@@ -8,39 +8,6 @@ import "swiper/css/effect-fade";
 
 const slides = [
   {
-    img: assets.hero_2,
-    tag: "New Arrival",
-    title: "Phone Charms",
-    desc: "Những chiếc charm xinh xắn làm thủ công, biến điện thoại của bạn thành tác phẩm nghệ thuật mang đậm dấu ấn cá nhân.",
-    link: "/phone-charms",
-    badge: "✨ Hot Trend 2026",
-    tabColor: "bg-[#FFB7C5]",
-    tapeColor: "bg-[#FFC2D1]/80",
-    stampText: "MOMO 2026",
-  },
-  {
-    img: assets.hero_3,
-    tag: "Handmade",
-    title: "Keychain",
-    desc: "Móc khóa và ghim cài áo độc đáo — người bạn đồng hành đáng yêu trên mọi chuyến đi.",
-    link: "/keychain",
-    badge: "🎀 100% Thủ Công",
-    tabColor: "bg-[#B8DEFF]",
-    tapeColor: "bg-[#B8DEFF]/80",
-    stampText: "HAND MADE",
-  },
-  {
-    img: assets.hero_1,
-    tag: "Limited Edition",
-    title: "Stickers & Postcards",
-    desc: "Sticker cute và bưu thiếp vẽ tay — gửi gắm yêu thương ngọt ngào qua từng nét vẽ.",
-    link: "/stickers",
-    badge: "🎨 Vẽ Tay Độc Quyền",
-    tabColor: "bg-[#FFE082]",
-    tapeColor: "bg-[#FFE082]/80",
-    stampText: "ART PRINT",
-  },
-  {
     img: assets.hero_7,
     tag: "Bestseller",
     title: "Mail Club",
@@ -50,6 +17,7 @@ const slides = [
     tabColor: "bg-[#C8E6C9]",
     tapeColor: "bg-[#C8E6C9]/80",
     stampText: "MAIL CLUB",
+    span: "Buy artwork",
   },
   {
     img: assets.home_7,
@@ -61,6 +29,7 @@ const slides = [
     tabColor: "bg-[#E1BEE7]",
     tapeColor: "bg-[#E1BEE7]/80",
     stampText: "WITH LOVE",
+    span: "Khám phá ngay",
   },
 ];
 
@@ -144,7 +113,7 @@ const Hero = () => {
               to={slides[activeIndex].link}
               className="inline-flex items-center gap-2 bg-[#4A4A6A] hover:bg-[#FF85A1] text-white text-xs font-bold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wider"
             >
-              <span>Khám phá ngay</span>
+              <span>{slides[activeIndex].span}</span>
               <span>→</span>
             </Link>
 

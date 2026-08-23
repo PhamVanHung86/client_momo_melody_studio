@@ -207,7 +207,7 @@ const Navbar = () => {
                   </svg>
 
                   {unreadCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 w-4 h-4 text-center leading-4 bg-[#FFB7C5] text-white font-bold rounded-full text-[9px] shadow-sm animate-pulse">
+                    <span className="absolute -top-0.5 -right-0.5 w-4 h-4 text-center leading-4 bg-[#8B98E3] text-white font-bold rounded-full text-[9px] shadow-sm animate-pulse">
                       {unreadCount}
                     </span>
                   )}
@@ -275,7 +275,7 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* 👤 Profile Icon & Dropdown Menu (Chỉ hiện trên Desktop) */}
+            {/* Profile Icon & Dropdown Menu (Chỉ hiện trên Desktop) */}
             <div className="hidden sm:block group relative">
               <div className="cursor-pointer p-1 flex items-center justify-center">
                 {user?.avatar ? (
@@ -293,7 +293,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* ✨ DROPDOWN DESKTOP ĐÃ ĐƯỢC THIẾT KẾ LẠI RỘNG RÃI & ĐẸP HƠN */}
+              {/* DROPDOWN DESKTOP ĐÃ ĐƯỢC THIẾT KẾ LẠI RỘNG RÃI & ĐẸP HƠN */}
               <div className="group-hover:block hidden absolute right-0 pt-3 z-30">
                 <div className="flex flex-col gap-1 w-60 p-3 bg-white/95 backdrop-blur-md text-[#4A4A6A] rounded-2xl shadow-xl border border-[#C9C9EA]/50 text-xs animate-in fade-in slide-in-from-top-1 duration-150">
                   {user ? (
@@ -326,16 +326,24 @@ const Navbar = () => {
                         to="/profile"
                         className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#F5F4FF] hover:text-[#8B98E3] transition-all font-medium"
                       >
-                        <span className="text-sm">👤</span>
+                        <img
+                          src="/images/hosocuatoi.svg"
+                          alt="ID Card"
+                          className="w-4 h-4 shrink-0 object-contain"
+                        />
                         <span>Hồ sơ của tôi</span>
                       </Link>
 
                       {/* 👉 Yêu thích đã được chuyển vào đây! */}
                       <Link
                         to="/wishlist"
-                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#FFFAF5] hover:text-[#FFB7C5] transition-all font-medium"
+                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#FFFAF5] hover:text-[#8B98E3] transition-all font-medium"
                       >
-                        <span className="text-sm">❤️</span>
+                        <img
+                          src="/images/yeuthich.svg"
+                          alt="ID Card"
+                          className="w-4 h-4 shrink-0 object-contain"
+                        />
                         <span>Sản phẩm yêu thích</span>
                       </Link>
 
@@ -343,7 +351,11 @@ const Navbar = () => {
                         to="/orders"
                         className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#F5F4FF] hover:text-[#8B98E3] transition-all font-medium"
                       >
-                        <span className="text-sm">📦</span>
+                        <img
+                          src="/images/donhang.svg"
+                          alt="ID Card"
+                          className="w-4 h-4 shrink-0 object-contain"
+                        />
                         <span>Đơn hàng của tôi</span>
                       </Link>
 
@@ -352,9 +364,13 @@ const Navbar = () => {
                       <button
                         type="button"
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#FFB7C5]/15 text-[#FF8A9A] transition-all font-medium text-left"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#8B98E3]/15 text-[#FF8A9A] transition-all font-medium text-left"
                       >
-                        <span className="text-sm">🚪</span>
+                        <img
+                          src="/images/logout.svg"
+                          alt="ID Card"
+                          className="w-4 h-4 shrink-0 object-contain"
+                        />
                         <span>Đăng xuất</span>
                       </button>
                     </>
@@ -364,13 +380,23 @@ const Navbar = () => {
                         to="/login"
                         className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-[#F5F4FF] hover:text-[#8B98E3] transition-all font-medium"
                       >
-                        <span>🔑</span> Đăng nhập
+                        <img
+                          src="/images/login.svg"
+                          alt="Login"
+                          className="w-5 h-5 shrink-0 object-contain"
+                        />
+                        <span>Đăng nhập</span>
                       </Link>
                       <Link
                         to="/login?mode=register"
                         className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-[#F5F4FF] hover:text-[#8B98E3] transition-all font-medium"
                       >
-                        <span>✨</span> Đăng ký
+                        <img
+                          src="/images/register.svg"
+                          alt="Login"
+                          className="w-5 h-5 shrink-0 object-contain"
+                        />
+                        <span>Đăng ký</span>
                       </Link>
                     </>
                   )}
@@ -525,16 +551,27 @@ const Navbar = () => {
                 <Link
                   to="/profile"
                   onClick={() => setVisible(false)}
-                  className="text-center text-xs py-1.5 px-2 rounded-xl bg-white text-[#4A4A6A] shadow-sm hover:text-[#8B98E3] transition-colors"
+                  className="flex items-center justify-center gap-1.5 text-xs py-1.5 px-2 rounded-xl bg-white text-[#4A4A6A] shadow-sm hover:text-[#8B98E3] transition-colors whitespace-nowrap"
                 >
-                  👤 Hồ sơ
+                  <img
+                    src="/images/hosocuatoi.svg"
+                    alt="Profile"
+                    className="w-4 h-4 shrink-0 object-contain"
+                  />
+                  <span>Profile</span>
                 </Link>
+
                 <Link
                   to="/orders"
                   onClick={() => setVisible(false)}
-                  className="text-center text-xs py-1.5 px-2 rounded-xl bg-white text-[#4A4A6A] shadow-sm hover:text-[#8B98E3] transition-colors"
+                  className="flex items-center justify-center gap-1.5 text-xs py-1.5 px-2 rounded-xl bg-white text-[#4A4A6A] shadow-sm hover:text-[#8B98E3] transition-colors whitespace-nowrap"
                 >
-                  📦 Đơn hàng
+                  <img
+                    src="/images/donhang.svg"
+                    alt="Orders"
+                    className="w-4 h-4 shrink-0 object-contain"
+                  />
+                  <span>Đơn hàng</span>
                 </Link>
               </div>
             </div>
@@ -591,10 +628,14 @@ const Navbar = () => {
             <Link
               to="/wishlist"
               onClick={() => setVisible(false)}
-              className="flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-medium text-[#4A4A6A]/80 hover:bg-[#FFFAF5] hover:text-[#FFB7C5] transition-colors"
+              className="flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-medium text-[#4A4A6A]/80 hover:bg-[#FFFAF5] hover:text-[#8B98E3] transition-colors"
             >
               <div className="flex items-center gap-2">
-                <span>❤️</span>
+                <img
+                  src="/images/yeuthich.svg"
+                  alt="ID Card"
+                  className="w-4 h-4 shrink-0 object-contain"
+                />
                 <span>Sản phẩm yêu thích</span>
               </div>
               <span className="text-[10px] text-[#4A4A6A]/40">›</span>
@@ -609,7 +650,7 @@ const Navbar = () => {
                 setVisible(false);
                 handleLogout();
               }}
-              className="w-full py-2.5 px-4 rounded-xl text-xs text-[#FF8A9A] font-medium bg-white hover:bg-[#FFB7C5]/10 border border-[#FFB7C5]/30 transition-colors flex items-center justify-center gap-2 shadow-sm"
+              className="w-full py-2.5 px-4 rounded-xl text-xs text-[#FF8A9A] font-medium bg-white hover:bg-[#8B98E3]/10 border border-[#8B98E3]/30 transition-colors flex items-center justify-center gap-2 shadow-sm"
             >
               <span>🚪</span>
               <span>Đăng xuất tài khoản</span>

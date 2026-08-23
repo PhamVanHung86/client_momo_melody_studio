@@ -21,8 +21,8 @@ export const PLANS = [
     price: "135,000đ",
     duration: "1 tháng",
     benefits: ["1 mail club handmade của tháng", "3-5 sản phẩm độc quyền"],
-    bg: "bg-[#FFD6E0]",
-    border: "border-[#FFB7C5]",
+    bg: "bg-[#CBD1F2]",
+    border: "border-[#8B98E3]",
   },
   {
     id: "quarterly",

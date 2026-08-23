@@ -24,13 +24,13 @@ const NotFound = () => {
       <div className="flex gap-4">
         <Link
           to="/"
-          className="bg-[#FFB7C5] text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-[#ff9db5] transition-colors"
+          className="bg-[#8B98E3] text-white px-8 py-3 rounded-full text-sm font-semibold hover:bg-[#8B98E3] transition-colors"
         >
           Về trang chủ
         </Link>
         <Link
           to="/collection"
-          className="border border-[#FFD6E0] text-[#4A4A6A] px-8 py-3 rounded-full text-sm font-semibold hover:bg-[#FFF0F5] transition-colors"
+          className="border border-[#CBD1F2] text-[#4A4A6A] px-8 py-3 rounded-full text-sm font-semibold hover:bg-[#E8EAF9] transition-colors"
         >
           Xem sản phẩm
         </Link>

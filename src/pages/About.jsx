@@ -13,7 +13,7 @@ const About = () => {
 
       <div className="min-h-screen bg-[#FFFAF5]">
         {/* Banner */}
-        <div className="bg-[#FFD6E0] py-14 text-center px-4">
+        <div className="bg-[#CBD1F2] py-14 text-center px-4">
           <span className="text-5xl">🌸</span>
           <h1
             style={{ fontFamily: "'Dancing Script', cursive" }}
@@ -42,7 +42,7 @@ const About = () => {
                 style={{ fontFamily: "'Dancing Script', cursive" }}
                 className="text-3xl text-[#4A4A6A]"
               >
-                Câu chuyện của momo 🩷
+                Câu chuyện của momo 🩵
               </h2>
               <p className="text-sm text-[#4A4A6A]/70 leading-relaxed">
                 momo's melody studio bắt đầu từ một góc nhỏ với đôi tay và trái
@@ -71,8 +71,8 @@ const About = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-20">
             {[
               {
-                emoji: "🩷",
-                bg: "bg-[#FFD6E0]",
+                emoji: "🩵",
+                bg: "bg-[#CBD1F2]",
                 title: "Làm bằng tình yêu",
                 desc: "Mỗi sản phẩm đều được làm thủ công tỉ mỉ, không có hai sản phẩm nào hoàn toàn giống nhau.",
               },

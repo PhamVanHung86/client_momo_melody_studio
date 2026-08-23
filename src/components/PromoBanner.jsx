@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const PromoBanner = () => {
   return (
     <div className="mx-4 sm:mx-[5vw] md:mx-[7vw] lg:mx-[9vw] my-16">
-      <div className="relative bg-[#FFB7C5] rounded-3xl px-8 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
+      <div className="relative bg-[#8B98E3] rounded-3xl px-8 py-12 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
         <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#FFF0A0]/40 rounded-full"></div>
         <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#B8DEFF]/40 rounded-full"></div>
 

@@ -44,10 +44,10 @@ const ProductItem = ({ id, image, name, price, stock }) => {
   return (
     <Link
       to={`/product/${id}`}
-      className="group relative bg-white rounded-3xl p-2.5 border border-[#FFD6E0]/60 shadow-sm hover:shadow-xl hover:shadow-[#FFB7C5]/30 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
+      className="group relative bg-white rounded-3xl p-2.5 border border-[#CBD1F2]/60 shadow-sm hover:shadow-xl hover:shadow-[#8B98E3]/30 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
     >
       {/* 🖼️ KHUNG ẢNH & CHI TIẾT HOVER */}
-      <div className="overflow-hidden rounded-2xl bg-[#FFF0F5] relative aspect-[3/4]">
+      <div className="overflow-hidden rounded-2xl bg-[#E8EAF9] relative aspect-[3/4]">
         <FadeImage
           ref={imgRef}
           className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out ${
@@ -69,7 +69,7 @@ const ProductItem = ({ id, image, name, price, stock }) => {
 
         {/* 🔥 Badge Sale */}
         {isOnSale && !isOutOfStock && (
-          <span className="absolute top-2.5 left-2.5 bg-gradient-to-r from-[#FF6B81] to-[#FF85A1] text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md border border-white/40 animate-pulse z-10">
+          <span className="absolute top-2.5 left-2.5 bg-gradient-to-r from-[#8B98E3] to-[#8B98E3] text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md border border-white/40 animate-pulse z-10">
             Sale 🔥
           </span>
         )}
@@ -87,7 +87,7 @@ const ProductItem = ({ id, image, name, price, stock }) => {
         {/* ✨ Nút "Xem chi tiết" trượt lên khi hover (Nhấn vào sẽ chuyển sang trang chi tiết sản phẩm) */}
         {!isOutOfStock && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-3">
-            <span className="bg-white/90 backdrop-blur-md text-[#FF6B81] text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+            <span className="bg-white/90 backdrop-blur-md text-[#8B98E3] text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
               Xem chi tiết ✨
             </span>
           </div>
@@ -96,14 +96,14 @@ const ProductItem = ({ id, image, name, price, stock }) => {
 
       {/* 📝 THÔNG TIN SẢN PHẨM */}
       <div className="mt-3 px-1 pb-1 flex flex-col justify-between flex-1">
-        <p className="text-sm font-medium text-[#4A4A6A] truncate group-hover:text-[#FF6B81] transition-colors">
+        <p className="text-sm font-medium text-[#4A4A6A] truncate group-hover:text-[#8B98E3] transition-colors">
           {name}
         </p>
 
-        <div className="flex items-center justify-between gap-1.5 mt-1.5 pt-2 border-t border-[#FFD6E0]/30">
+        <div className="flex items-center justify-between gap-1.5 mt-1.5 pt-2 border-t border-[#CBD1F2]/30">
           {/* Giá bán & Giá gốc */}
           <div className="flex items-baseline gap-1.5 flex-wrap">
-            <p className="text-sm font-extrabold text-[#FF6B81]">
+            <p className="text-sm font-extrabold text-[#8B98E3]">
               {salePrice.toLocaleString()} {currency}
             </p>
             {isOnSale && (
@@ -119,7 +119,7 @@ const ProductItem = ({ id, image, name, price, stock }) => {
               type="button"
               onClick={handleAddToCartWithFly}
               title="Thêm vào giỏ hàng"
-              className="w-8 h-8 rounded-full bg-[#FFF0F5] text-[#FF6B81] hover:bg-[#FF6B81] hover:text-white flex items-center justify-center text-xs transition-all duration-300 shrink-0 shadow-sm active:scale-90 cursor-pointer"
+              className="w-8 h-8 rounded-full bg-[#E8EAF9] text-[#8B98E3] hover:bg-[#8B98E3] hover:text-white flex items-center justify-center text-xs transition-all duration-300 shrink-0 shadow-sm active:scale-90 cursor-pointer"
             >
               🛒
             </button>

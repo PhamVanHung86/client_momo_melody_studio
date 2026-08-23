@@ -5,7 +5,7 @@
 
 // const statusColor = {
 //   "Đã xác nhận": "bg-[#C9A0FF] text-[#4A4A6A]",
-//   "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
+//   "Đang xử lý": "bg-[#CBD1F2] text-[#4A4A6A]",
 //   "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
 //   "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
 //   "Đã hủy": "bg-gray-100 text-gray-400",
@@ -79,7 +79,7 @@
 //         </p>
 //         <Link
 //           to="/"
-//           className="mt-2 bg-[#FFB7C5] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#ff9db5] transition-colors"
+//           className="mt-2 bg-[#8B98E3] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#8B98E3] transition-colors"
 //         >
 //           Mua sắm ngay
 //         </Link>
@@ -100,7 +100,7 @@
 //         {orders.map((order) => (
 //           <div
 //             key={order._id}
-//             className="bg-white rounded-3xl p-6 shadow-sm border border-[#FFD6E0]/50"
+//             className="bg-white rounded-3xl p-6 shadow-sm border border-[#CBD1F2]/50"
 //           >
 //             <div className="flex items-center justify-between mb-4">
 //               <div>
@@ -121,7 +121,7 @@
 //               </div>
 //             </div>
 
-//             <hr className="border-[#FFD6E0] mb-4" />
+//             <hr className="border-[#CBD1F2] mb-4" />
 
 //             <div className="flex flex-col gap-2 mb-4">
 //               {order.items.map((item, i) => (
@@ -135,18 +135,18 @@
 //                       x{item.quantity}
 //                     </span>
 //                   </p>
-//                   <p className="text-[#FFB7C5] font-medium">
+//                   <p className="text-[#8B98E3] font-medium">
 //                     {(item.price * item.quantity).toLocaleString()} VND
 //                   </p>
 //                 </div>
 //               ))}
 //             </div>
 
-//             <hr className="border-[#FFD6E0] mb-4" />
+//             <hr className="border-[#CBD1F2] mb-4" />
 
 //             <div className="flex items-center justify-between">
 //               <p className="text-sm text-[#4A4A6A]/60">Tổng cộng</p>
-//               <p className="text-base font-semibold text-[#FFB7C5]">
+//               <p className="text-base font-semibold text-[#8B98E3]">
 //                 {order.total.toLocaleString()} VND
 //               </p>
 //             </div>
@@ -155,7 +155,7 @@
 //               <button
 //                 onClick={() => handleCancel(order._id)}
 //                 disabled={cancellingId === order._id}
-//                 className="mt-4 w-full text-center text-xs font-medium text-[#4A4A6A]/60 border border-[#FFD6E0] rounded-xl py-2.5 hover:bg-[#FFF0F5] hover:text-[#FFB7C5] transition-colors disabled:opacity-40"
+//                 className="mt-4 w-full text-center text-xs font-medium text-[#4A4A6A]/60 border border-[#CBD1F2] rounded-xl py-2.5 hover:bg-[#E8EAF9] hover:text-[#8B98E3] transition-colors disabled:opacity-40"
 //               >
 //                 {cancellingId === order._id ? "Đang huỷ..." : "Huỷ đơn hàng"}
 //               </button>
@@ -175,7 +175,7 @@ import { apiFetch } from "../api/client";
 
 const statusColor = {
   "Đã xác nhận": "bg-[#C9A0FF] text-[#4A4A6A]",
-  "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
+  "Đang xử lý": "bg-[#CBD1F2] text-[#4A4A6A]",
   "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
   "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
   "Đã hủy": "bg-gray-100 text-gray-400",
@@ -220,7 +220,7 @@ const Orders = () => {
         </p>
         <Link
           to="/"
-          className="mt-2 bg-[#FFB7C5] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#ff9db5] transition-colors"
+          className="mt-2 bg-[#8B98E3] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#8B98E3] transition-colors"
         >
           Mua sắm ngay
         </Link>
@@ -232,16 +232,21 @@ const Orders = () => {
     <div className="min-h-screen bg-[#FFFAF5] px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] py-12">
       <h1
         style={{ fontFamily: "'Dancing Script', cursive" }}
-        className="text-4xl text-[#4A4A6A] mb-10"
+        className="text-4xl text-[#4A4A6A] mb-10 flex items-center gap-3"
       >
-        Đơn hàng của bạn 📦
+        <span>Đơn hàng của bạn</span>
+        <img
+          src="/images/donhang.svg"
+          alt="Orders"
+          className="w-9 h-9 shrink-0 object-contain"
+        />
       </h1>
 
       <div className="flex flex-col gap-5">
         {orders.map((order) => (
           <div
             key={order._id}
-            className="bg-white rounded-3xl p-6 shadow-sm border border-[#FFD6E0]/50"
+            className="bg-white rounded-3xl p-6 shadow-sm border border-[#CBD1F2]/50"
           >
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -262,7 +267,7 @@ const Orders = () => {
               </div>
             </div>
 
-            <hr className="border-[#FFD6E0] mb-4" />
+            <hr className="border-[#CBD1F2] mb-4" />
 
             <div className="flex flex-col gap-2 mb-4">
               {order.items.map((item, i) => (
@@ -276,18 +281,18 @@ const Orders = () => {
                       x{item.quantity}
                     </span>
                   </p>
-                  <p className="text-[#FFB7C5] font-medium">
+                  <p className="text-[#8B98E3] font-medium">
                     {(item.price * item.quantity).toLocaleString()} VND
                   </p>
                 </div>
               ))}
             </div>
 
-            <hr className="border-[#FFD6E0] mb-4" />
+            <hr className="border-[#CBD1F2] mb-4" />
 
             <div className="flex items-center justify-between">
               <p className="text-sm text-[#4A4A6A]/60">Tổng cộng</p>
-              <p className="text-base font-semibold text-[#FFB7C5]">
+              <p className="text-base font-semibold text-[#8B98E3]">
                 {order.total.toLocaleString()} VND
               </p>
             </div>

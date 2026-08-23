@@ -6,7 +6,7 @@ import { ProductGridSkeleton } from "./ProductSkeleton";
 const ITEMS_PER_PAGE = 8;
 
 const CategoryPage = ({ title, category, emoji, description }) => {
-  const { products, loadingProducts } = useContext(ShopContext);
+  const { products, loadingProducts, fetchProducts } = useContext(ShopContext);
   const [currentPage, setCurrentPage] = useState(1);
 
   const filtered = products.filter(
@@ -28,7 +28,7 @@ const CategoryPage = ({ title, category, emoji, description }) => {
   return (
     <div className="bg-[#FFFAF5]">
       {/* Banner */}
-      <div className="bg-pastel-blue-light py-14 sm:pt-20 sm:-mt-5 text-center px-4">
+      <div className="bg-[#CBD1F2] py-14 sm:pt-20 sm:-mt-5 text-center px-4">
         <span className="text-5xl">{emoji}</span>
         <h1
           style={{ fontFamily: "'Dancing Script', cursive" }}
@@ -44,6 +44,22 @@ const CategoryPage = ({ title, category, emoji, description }) => {
       <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] py-12">
         {loadingProducts ? (
           <ProductGridSkeleton count={8} />
+        ) : products.length === 0 ? (
+          <div className="text-center py-24">
+            <span className="text-6xl">😿</span>
+            <p
+              style={{ fontFamily: "'Dancing Script', cursive" }}
+              className="text-2xl text-[#4A4A6A]/60 mt-4"
+            >
+              Không tải được dữ liệu sản phẩm...
+            </p>
+            <button
+              onClick={() => fetchProducts()}
+              className="mt-4 text-sm bg-[#B0B9EC] text-white px-5 py-2.5 rounded-full hover:bg-[#8B98E3] transition-colors"
+            >
+              Thử tải lại
+            </button>
+          </div>
         ) : filtered.length > 0 ? (
           <>
             {/* Thông tin số lượng */}
@@ -73,7 +89,7 @@ const CategoryPage = ({ title, category, emoji, description }) => {
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="w-9 h-9 rounded-full border border-[#FFD6E0] text-[#4A4A6A] text-sm hover:bg-[#FFD6E0] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                  className="w-9 h-9 rounded-full border border-[#CBD1F2] text-[#4A4A6A] text-sm hover:bg-[#CBD1F2] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
                 >
                   ←
                 </button>
@@ -121,8 +137,8 @@ const CategoryPage = ({ title, category, emoji, description }) => {
                         onClick={() => handlePageChange(page)}
                         className={`w-9 h-9 rounded-full text-sm font-medium transition-all ${
                           currentPage === page
-                            ? "bg-[#FFB7C5] text-white shadow-sm"
-                            : "border border-[#FFD6E0] text-[#4A4A6A] hover:bg-[#FFD6E0]"
+                            ? "bg-[#8B98E3] text-white shadow-sm"
+                            : "border border-[#CBD1F2] text-[#4A4A6A] hover:bg-[#CBD1F2]"
                         }`}
                       >
                         {page}
@@ -135,7 +151,7 @@ const CategoryPage = ({ title, category, emoji, description }) => {
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="w-9 h-9 rounded-full border border-[#FFD6E0] text-[#4A4A6A] text-sm hover:bg-[#FFD6E0] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                  className="w-9 h-9 rounded-full border border-[#CBD1F2] text-[#4A4A6A] text-sm hover:bg-[#CBD1F2] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
                 >
                   →
                 </button>

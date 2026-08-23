@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         "pastel-pink": "#F8BBD0",
-        "pastel-pink-light": "#FFD6E0",
+        "pastel-pink-light": "#CBD1F2",
         "pastel-yellow": "#FFF0A0",
         "pastel-blue": "#C0B9DD",
         "pastel-blue-1": "#8B98E3",
@@ -13,7 +13,7 @@ export default {
         "pastel-blue-light": "#E0F2F1",
         "primary-blue": "#3949AB",
         "bg-page": "#FFFAF5",
-        "bg-card": "#FFF0F5",
+        "bg-card": "#E8EAF9",
         "text-main": "#4A4A6A",
       },
       fontFamily: {

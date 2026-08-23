@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 export const themes = {
   sakura: {
     name: "🌸 Sakura",
-    bg: { page: "#FFF5F8", card: "#FFE5F4", banner: "#FFB3C9" },
+    bg: { page: "#CBD1F2", card: "#FFE5F4", banner: "#FFB3C9" },
     primary: "#FFB3C9",
     primaryHover: "#f094ae",
     secondary: "#FFE5F4",

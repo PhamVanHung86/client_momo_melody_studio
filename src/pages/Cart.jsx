@@ -3,6 +3,8 @@ import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { cldUrl } from "../utils/cldUrl";
+import cartIcon from "../assets/conversation.svg";
+import FireworksButton from "../components/FireworksButton";
 
 const Cart = () => {
   const {
@@ -33,7 +35,11 @@ const Cart = () => {
   if (cartList.length === 0) {
     return (
       <div className="min-h-screen bg-[#FFFAF5] flex flex-col items-center justify-center gap-4">
-        <span className="text-6xl">🛍️</span>
+        <img
+          src="/images/giohang.svg"
+          alt="Shopping Bag"
+          className="w-24 h-24 object-contain"
+        />
         <p
           style={{ fontFamily: "'Dancing Script', cursive" }}
           className="text-2xl text-[#4A4A6A]/60"
@@ -42,7 +48,7 @@ const Cart = () => {
         </p>
         <Link
           to="/"
-          className="mt-2 bg-[#FFB7C5] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#ff9db5] transition-colors"
+          className="mt-2 bg-[#8B98E3] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#8B98E3] transition-colors"
         >
           Tiếp tục mua sắm
         </Link>
@@ -55,9 +61,10 @@ const Cart = () => {
       {/* Tiêu đề */}
       <h1
         style={{ fontFamily: "'Dancing Script', cursive" }}
-        className="text-4xl text-[#4A4A6A] mb-10"
+        className="text-4xl text-[#4A4A6A] mb-10 inline-flex items-center gap-3"
       >
-        Giỏ hàng của bạn 🛍️
+        <span>Giỏ hàng của bạn</span>
+        <img src={cartIcon} alt="Cart" className="w-9 h-9 object-contain" />
       </h1>
 
       <div className="flex flex-col lg:flex-row gap-10">
@@ -69,10 +76,10 @@ const Cart = () => {
             return (
               <div
                 key={item._id}
-                className="flex items-center gap-4 bg-white rounded-2xl p-4 shadow-sm border border-[#FFD6E0]/50"
+                className="flex items-center gap-4 bg-white rounded-2xl p-4 shadow-sm border border-[#CBD1F2]/50"
               >
                 {/* Ảnh */}
-                <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#FFF0F5] flex-shrink-0">
+                <div className="w-20 h-20 rounded-xl overflow-hidden bg-[#E8EAF9] flex-shrink-0">
                   <img
                     src={cldUrl(p.image[0], { width: 150 })}
                     alt={p.name}
@@ -87,7 +94,7 @@ const Cart = () => {
                   <p className="text-sm font-medium text-[#4A4A6A] truncate">
                     {p.name}
                   </p>
-                  <p className="text-sm text-[#FFB7C5] font-semibold mt-1 flex items-center gap-2">
+                  <p className="text-sm text-[#8B98E3] font-semibold mt-1 flex items-center gap-2">
                     {getProductPrice(p._id).toLocaleString()} {currency}
                     {getProductPrice(p._id) < p.price && (
                       <span className="text-xs text-[#4A4A6A]/40 line-through">
@@ -98,10 +105,10 @@ const Cart = () => {
                 </div>
 
                 {/* Số lượng */}
-                <div className="flex items-center gap-2 bg-[#FFF0F5] rounded-xl px-3 py-1">
+                <div className="flex items-center gap-2 bg-[#E8EAF9] rounded-xl px-3 py-1">
                   <button
                     onClick={() => updateQty(item._id, item.quantity - 1)}
-                    className="text-[#4A4A6A] w-5 text-center hover:text-[#FFB7C5] transition-colors font-medium"
+                    className="text-[#4A4A6A] w-5 text-center hover:text-[#8B98E3] transition-colors font-medium"
                   >
                     −
                   </button>
@@ -110,7 +117,7 @@ const Cart = () => {
                   </span>
                   <button
                     onClick={() => updateQty(item._id, item.quantity + 1)}
-                    className="text-[#4A4A6A] w-5 text-center hover:text-[#FFB7C5] transition-colors font-medium"
+                    className="text-[#4A4A6A] w-5 text-center hover:text-[#8B98E3] transition-colors font-medium"
                   >
                     +
                   </button>
@@ -130,7 +137,7 @@ const Cart = () => {
 
         {/* Tổng tiền */}
         <div className="w-full lg:w-80 flex-shrink-0">
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#FFD6E0]/50 sticky top-[120px]">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#CBD1F2]/50 sticky top-[120px]">
             <h2
               style={{ fontFamily: "'Dancing Script', cursive" }}
               className="text-2xl text-[#4A4A6A] mb-6"
@@ -151,25 +158,26 @@ const Cart = () => {
                   {delivery_fee.toLocaleString()} {currency}
                 </span>
               </div>
-              <hr className="border-[#FFD6E0] my-1" />
+              <hr className="border-[#CBD1F2] my-1" />
               <div className="flex justify-between font-semibold text-base">
                 <span>Tổng cộng</span>
-                <span className="text-[#FFB7C5]">
+                <span className="text-[#8B98E3]">
                   {total.toLocaleString()} {currency}
                 </span>
               </div>
             </div>
 
-            <Link
+            <FireworksButton
+              fireworks={false}
               to="/place-order"
-              className="mt-6 block w-full bg-[#FFB7C5] text-white text-center py-3 rounded-2xl text-sm font-semibold hover:bg-[#ff9db5] transition-colors"
+              className="mt-6 w-full text-sm font-semibold"
             >
               Đặt hàng ngay →
-            </Link>
+            </FireworksButton>
 
             <Link
               to="/"
-              className="mt-3 block w-full text-center text-xs text-[#4A4A6A]/50 hover:text-[#FFB7C5] transition-colors"
+              className="mt-3 block w-full text-center text-xs text-[#4A4A6A]/50 hover:text-[#8B98E3] transition-colors"
             >
               ← Tiếp tục mua sắm
             </Link>

@@ -5,7 +5,7 @@ const SEO = ({ title, description, image, url, structuredData }) => {
   const defaultDesc =
     "Những món đồ handmade nhỏ xinh được làm thủ công tỉ mỉ — phone charms, keychain, stickers, postcards & mail club.";
   const defaultImage = "/og-image.jpg";
-  const siteUrl = "https://momomelody.vn";
+  const siteUrl = "https://momomeomeow.com";
 
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const metaDesc = description || defaultDesc;

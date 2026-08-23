@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
 import { ProductGridSkeleton } from "./ProductSkeleton";
+import FireworksButton from "./FireworksButton";
 
 const LatestCollection = () => {
   const { products, loadingProducts } = useContext(ShopContext);
@@ -22,7 +23,7 @@ const LatestCollection = () => {
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-[#4A4A6A]/60 mt-3 leading-relaxed">
           Những món handmade mới nhất vừa ra lò — phone charms, keychain,
           stickers và nhiều hơn nữa, tất cả được làm thủ công tỉ mỉ với tất cả
-          tình yêu thương 🩷
+          tình yêu thương 🩵
         </p>
       </div>
 
@@ -46,12 +47,13 @@ const LatestCollection = () => {
 
       {/* Nút xem thêm */}
       <div className="text-center mt-12">
-        <Link
+        <FireworksButton
+          fireworks={false}
           to="/collection"
-          className="inline-block bg-[#b8deff] text-white px-10 py-3 rounded-full text-sm font-semibold hover:bg-[#ff9db5] active:scale-95 transition-all duration-300 shadow-sm"
+          className="hover:!bg-[#8B98E3] !px-10 !py-3 !rounded-full !text-sm font-semibold"
         >
           Xem tất cả sản phẩm 🛍️
-        </Link>
+        </FireworksButton>
       </div>
     </div>
   );

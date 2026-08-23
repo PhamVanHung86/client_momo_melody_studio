@@ -63,15 +63,21 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    // Gửi kèm refreshToken để server thu hồi hẳn (không dùng lại được nữa),
-    // không chỉ đơn thuần xoá ở phía trình duyệt.
-    await apiFetch("/api/auth/logout", {
-      method: "POST",
-      body: JSON.stringify({ refreshToken: getRefreshToken() }),
-    });
-    removeToken();
-    setUser(null);
-    localStorage.removeItem("cartItems"); // ← xóa cart luôn
+    try {
+      // Gửi yêu cầu thu hồi refreshToken lên server
+      await apiFetch("/api/auth/logout", {
+        method: "POST",
+        body: JSON.stringify({ refreshToken: getRefreshToken() }),
+      });
+    } catch (err) {
+      // Chỉ ghi log lỗi mạng/server, không dừng luồng dọn dẹp client
+      console.error("Không thể xóa token trên server:", err);
+    } finally {
+      // Khối finally LUÔN LUÔN CHẠY dù apiFetch thành công hay thất bại
+      removeToken();
+      setUser(null);
+      localStorage.removeItem("cartItems");
+    }
   };
 
   const updateProfile = async (formData) => {

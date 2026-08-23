@@ -6,7 +6,7 @@ import { cldUrl } from "../utils/cldUrl";
 
 const statusColor = {
   "Đã xác nhận": "bg-[#C9A0FF] text-[#4A4A6A]",
-  "Đang xử lý": "bg-[#FFD6E0] text-[#4A4A6A]",
+  "Đang xử lý": "bg-[#CBD1F2] text-[#4A4A6A]",
   "Đang giao": "bg-[#FFF0A0] text-[#4A4A6A]",
   "Đã giao": "bg-[#B8DEFF] text-[#4A4A6A]",
   "Đã hủy": "bg-gray-100 text-gray-400",
@@ -141,11 +141,11 @@ const Profile = () => {
             {avatarPreview || user?.avatar ? (
               <img
                 src={avatarPreview || user.avatar}
-                className="w-20 h-20 rounded-full object-cover ring-4 ring-[#FFD6E0]"
+                className="w-20 h-20 rounded-full object-cover ring-4 ring-[#CBD1F2]"
                 alt={user?.name}
               />
             ) : (
-              <div className="w-20 h-20 rounded-full bg-[#FFD6E0] flex items-center justify-center text-2xl font-medium text-[#4A4A6A] ring-4 ring-[#FFD6E0]">
+              <div className="w-20 h-20 rounded-full bg-[#CBD1F2] flex items-center justify-center text-2xl font-medium text-[#4A4A6A] ring-4 ring-[#CBD1F2]">
                 {user?.name?.[0]?.toUpperCase()}
               </div>
             )}
@@ -172,7 +172,7 @@ const Profile = () => {
       </div> */}
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-8 border-b border-[#FFD6E0]">
+      <div className="flex gap-2 mb-8 border-b border-[#CBD1F2]">
         {[
           { key: "profile", label: "Thông tin" },
           { key: "orders", label: `Đơn hàng (${orders.length})` },
@@ -182,13 +182,13 @@ const Profile = () => {
             onClick={() => setActiveTab(tab.key)}
             className={`pb-3 px-4 text-sm font-medium transition-colors relative ${
               activeTab === tab.key
-                ? "text-[#FFB7C5]"
+                ? "text-[#8B98E3]"
                 : "text-[#4A4A6A]/50 hover:text-[#4A4A6A]"
             }`}
           >
             {tab.label}
             {activeTab === tab.key && (
-              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FFB7C5] rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8B98E3] rounded-full" />
             )}
           </button>
         ))}
@@ -211,12 +211,12 @@ const Profile = () => {
                   {avatarPreview || user?.avatar ? (
                     <img
                       src={avatarPreview || cldUrl(user.avatar, { width: 100 })}
-                      className="w-16 h-16 rounded-full object-cover ring-4 ring-[#FFD6E0]"
+                      className="w-16 h-16 rounded-full object-cover ring-4 ring-[#CBD1F2]"
                       alt={user?.name || "User Avatar"}
                       referrerPolicy="no-referrer"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-full bg-[#FFD6E0] flex items-center justify-center text-xl font-medium text-[#4A4A6A]">
+                    <div className="w-16 h-16 rounded-full bg-[#CBD1F2] flex items-center justify-center text-xl font-medium text-[#4A4A6A]">
                       {user?.name?.[0]?.toUpperCase()}
                     </div>
                   )}
@@ -235,12 +235,12 @@ const Profile = () => {
                   {user?.avatar ? (
                     <img
                       src={cldUrl(user.avatar, { width: 100 })}
-                      className="w-16 h-16 rounded-full object-cover ring-4 ring-[#FFD6E0]"
+                      className="w-16 h-16 rounded-full object-cover ring-4 ring-[#CBD1F2]"
                       alt={user?.name || "User Avatar"}
                       referrerPolicy="no-referrer"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-full bg-[#FFD6E0] flex items-center justify-center text-xl font-medium text-[#4A4A6A]">
+                    <div className="w-16 h-16 rounded-full bg-[#CBD1F2] flex items-center justify-center text-xl font-medium text-[#4A4A6A]">
                       {user?.name?.[0]?.toUpperCase()}
                     </div>
                   )}
@@ -262,10 +262,10 @@ const Profile = () => {
                 <input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                  className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white"
                 />
               ) : (
-                <p className="px-4 py-3 text-sm text-[#4A4A6A] bg-[#FFFAF5] rounded-xl border border-[#FFD6E0]/50">
+                <p className="px-4 py-3 text-sm text-[#4A4A6A] bg-[#FFFAF5] rounded-xl border border-[#CBD1F2]/50">
                   {form.name || "Chưa cập nhật"}
                 </p>
               )}
@@ -274,7 +274,7 @@ const Profile = () => {
             {/* Email */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#4A4A6A]/60">Email</label>
-              <p className="px-4 py-3 text-sm text-[#4A4A6A]/40 bg-[#FFFAF5] rounded-xl border border-[#FFD6E0]/50">
+              <p className="px-4 py-3 text-sm text-[#4A4A6A]/40 bg-[#FFFAF5] rounded-xl border border-[#CBD1F2]/50">
                 {user?.email}
               </p>
             </div>
@@ -287,10 +287,10 @@ const Profile = () => {
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="0901 234 567"
-                  className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                  className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white"
                 />
               ) : (
-                <p className="px-4 py-3 text-sm text-[#4A4A6A] bg-[#FFFAF5] rounded-xl border border-[#FFD6E0]/50">
+                <p className="px-4 py-3 text-sm text-[#4A4A6A] bg-[#FFFAF5] rounded-xl border border-[#CBD1F2]/50">
                   {form.phone || "Chưa cập nhật"}
                 </p>
               )}
@@ -309,10 +309,10 @@ const Profile = () => {
                   }
                   placeholder="Số nhà, đường, phường, quận, tỉnh/thành phố"
                   rows={3}
-                  className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white resize-none"
+                  className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white resize-none"
                 />
               ) : (
-                <p className="px-4 py-3 text-sm text-[#4A4A6A] bg-[#FFFAF5] rounded-xl border border-[#FFD6E0]/50 min-h-[80px]">
+                <p className="px-4 py-3 text-sm text-[#4A4A6A] bg-[#FFFAF5] rounded-xl border border-[#CBD1F2]/50 min-h-[80px]">
                   {form.address || "Chưa cập nhật"}
                 </p>
               )}
@@ -333,7 +333,7 @@ const Profile = () => {
                     address: user?.address || "",
                   });
                 }}
-                className="flex-1 py-3 rounded-2xl border border-[#FFD6E0] text-sm text-[#4A4A6A] hover:bg-[#FFF0F5] transition-colors"
+                className="flex-1 py-3 rounded-2xl border border-[#CBD1F2] text-sm text-[#4A4A6A] hover:bg-[#E8EAF9] transition-colors"
               >
                 Hủy
               </button>
@@ -343,7 +343,7 @@ const Profile = () => {
                   setEditing(false);
                 }}
                 disabled={loading}
-                className="flex-1 py-3 rounded-2xl bg-[#FFB7C5] text-white text-sm font-semibold hover:bg-[#ff9db5] transition-colors disabled:opacity-50"
+                className="flex-1 py-3 rounded-2xl bg-[#8B98E3] text-white text-sm font-semibold hover:bg-[#8B98E3] transition-colors disabled:opacity-50"
               >
                 {loading ? "Đang lưu..." : "Lưu thay đổi 🌸"}
               </button>
@@ -351,18 +351,18 @@ const Profile = () => {
           ) : (
             <button
               onClick={() => setEditing(true)}
-              className="w-full py-3 rounded-2xl border-2 border-[#FFB7C5] text-[#FFB7C5] text-sm font-semibold hover:bg-[#FFF0F5] transition-colors"
+              className="w-full py-3 rounded-2xl border-2 border-[#8B98E3] text-[#8B98E3] text-sm font-semibold hover:bg-[#E8EAF9] transition-colors"
             >
               ✏️ Chỉnh sửa thông tin
             </button>
           )}
           {/* Đổi/Set mật khẩu */}
           {!editing && (
-            <div className="border-t border-[#FFD6E0]/50 pt-4 mt-2">
+            <div className="border-t border-[#CBD1F2]/50 pt-4 mt-2">
               {!showPasswordForm ? (
                 <button
                   onClick={() => setShowPasswordForm(true)}
-                  className="w-full py-2.5 rounded-2xl border border-[#FFD6E0] text-sm text-[#4A4A6A]/60 hover:bg-[#FFF0F5] transition-colors"
+                  className="w-full py-2.5 rounded-2xl border border-[#CBD1F2] text-sm text-[#4A4A6A]/60 hover:bg-[#E8EAF9] transition-colors"
                 >
                   🔑{" "}
                   {user?.hasPassword
@@ -403,7 +403,7 @@ const Profile = () => {
                           })
                         }
                         placeholder="••••••••"
-                        className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                        className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white"
                       />
                     </div>
                   )}
@@ -422,7 +422,7 @@ const Profile = () => {
                         })
                       }
                       placeholder="Ít nhất 6 ký tự"
-                      className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                      className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white"
                     />
                   </div>
 
@@ -440,7 +440,7 @@ const Profile = () => {
                         })
                       }
                       placeholder="Nhập lại mật khẩu mới"
-                      className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-white"
+                      className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white"
                     />
                   </div>
 
@@ -455,13 +455,13 @@ const Profile = () => {
                         });
                         setPasswordError("");
                       }}
-                      className="flex-1 py-3 rounded-2xl border border-[#FFD6E0] text-sm text-[#4A4A6A] hover:bg-[#FFF0F5]"
+                      className="flex-1 py-3 rounded-2xl border border-[#CBD1F2] text-sm text-[#4A4A6A] hover:bg-[#E8EAF9]"
                     >
                       Hủy
                     </button>
                     <button
                       onClick={handleSetPassword}
-                      className="flex-1 py-3 rounded-2xl bg-[#FFB7C5] text-white text-sm font-semibold hover:bg-[#ff9db5]"
+                      className="flex-1 py-3 rounded-2xl bg-[#8B98E3] text-white text-sm font-semibold hover:bg-[#8B98E3]"
                     >
                       {user?.hasPassword ? "Đổi mật khẩu" : "Tạo mật khẩu"} 🔑
                     </button>
@@ -480,7 +480,7 @@ const Profile = () => {
             orders.map((order) => (
               <div
                 key={order._id}
-                className="bg-white rounded-3xl p-5 border border-[#FFD6E0]/50"
+                className="bg-white rounded-3xl p-5 border border-[#CBD1F2]/50"
               >
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-sm font-semibold text-[#4A4A6A]">
@@ -504,7 +504,7 @@ const Profile = () => {
                     </p>
                   ))}
                 </div>
-                <p className="text-sm font-semibold text-[#FFB7C5] text-right">
+                <p className="text-sm font-semibold text-[#8B98E3] text-right">
                   {order.total.toLocaleString()} VND
                 </p>
               </div>

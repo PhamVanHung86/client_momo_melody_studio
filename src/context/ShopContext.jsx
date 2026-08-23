@@ -17,22 +17,44 @@ const ShopContextProvider = (props) => {
   const [wishlistIds, setWishlistIds] = useState([]);
 
   // Lấy sản phẩm từ API
-  const fetchProducts = async () => {
+  // const fetchProducts = async () => {
+  //   try {
+  //     const res = await fetch(apiUrl("/api/products"));
+  //     const data = await res.json();
+  //     if (data.success) {
+  //       // Map "images" (DB) → "image" (code cũ đang dùng)
+  //       const formatted = data.products.map((p) => ({
+  //         ...p,
+  //         image: p.images,
+  //       }));
+  //       setProducts(formatted);
+  //     }
+  //   } catch (err) {
+  //     console.error("Lỗi lấy sản phẩm:", err);
+  //   } finally {
+  //     setLoadingProducts(false);
+  //   }
+  // };
+  const fetchProducts = async (retriesLeft = 5) => {
     try {
       const res = await fetch(apiUrl("/api/products"));
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      if (data.success) {
-        // Map "images" (DB) → "image" (code cũ đang dùng)
-        const formatted = data.products.map((p) => ({
-          ...p,
-          image: p.images,
-        }));
-        setProducts(formatted);
-      }
+      if (!data.success) throw new Error("API trả về success = false");
+
+      const formatted = data.products.map((p) => ({
+        ...p,
+        image: p.images,
+      }));
+      setProducts(formatted);
+      setLoadingProducts(false);
     } catch (err) {
       console.error("Lỗi lấy sản phẩm:", err);
-    } finally {
-      setLoadingProducts(false);
+      if (retriesLeft > 0) {
+        setTimeout(() => fetchProducts(retriesLeft - 1), 2000);
+      } else {
+        setLoadingProducts(false);
+      }
     }
   };
 

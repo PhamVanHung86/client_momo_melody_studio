@@ -2,6 +2,14 @@
   command = "npm run build"
   publish = "dist"
 
+# Redirect domain Netlify cũ sang domain chính thức momomeomeow.com,
+# đặt TRƯỚC rule catch-all bên dưới để được ưu tiên khớp trước.
+[[redirects]]
+  from = "https://momomeomeow.netlify.app/*"
+  to = "https://momomeomeow.com/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -50,7 +50,7 @@ const Contact = () => {
             Liên hệ
           </h1>
           <p className="text-sm text-[#4A4A6A]/70 mt-2">
-            Chúng mình luôn sẵn sàng lắng nghe bạn 🩷
+            Chúng mình luôn sẵn sàng lắng nghe bạn 🩵
           </p>
         </div>
 
@@ -68,7 +68,7 @@ const Contact = () => {
                 {[
                   {
                     emoji: "📍",
-                    bg: "bg-[#FFD6E0]",
+                    bg: "bg-[#CBD1F2]",
                     title: "Địa chỉ",
                     desc: "Hồ Chí Minh, Việt Nam",
                   },
@@ -104,7 +104,7 @@ const Contact = () => {
 
             {/* Form liên hệ */}
             <div className="w-full md:w-1/2">
-              <div className="bg-white rounded-3xl p-8 shadow-sm border border-[#FFD6E0]/50">
+              <div className="bg-white rounded-3xl p-8 shadow-sm border border-[#CBD1F2]/50">
                 <h2
                   style={{ fontFamily: "'Dancing Script', cursive" }}
                   className="text-3xl text-[#4A4A6A] mb-6"
@@ -122,7 +122,7 @@ const Contact = () => {
                       Cảm ơn bạn đã nhắn tin!
                     </p>
                     <p className="text-xs text-[#4A4A6A]/50">
-                      Chúng mình sẽ phản hồi sớm nhất có thể 🩷
+                      Chúng mình sẽ phản hồi sớm nhất có thể 🩵
                     </p>
                   </div>
                 ) : (
@@ -136,7 +136,7 @@ const Contact = () => {
                         value={form.name}
                         onChange={handleChange}
                         placeholder="Nguyễn Văn A"
-                        className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-[#FFFAF5]"
+                        className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-[#FFFAF5]"
                       />
                     </div>
 
@@ -148,7 +148,7 @@ const Contact = () => {
                         value={form.email}
                         onChange={handleChange}
                         placeholder="momo@example.com"
-                        className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-[#FFFAF5]"
+                        className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-[#FFFAF5]"
                       />
                     </div>
 
@@ -162,7 +162,7 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="Bạn muốn hỏi gì, đặt hàng custom, hay chỉ muốn nói hi? 🌸"
                         rows={5}
-                        className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-[#FFFAF5] resize-none"
+                        className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-[#FFFAF5] resize-none"
                       />
                     </div>
 

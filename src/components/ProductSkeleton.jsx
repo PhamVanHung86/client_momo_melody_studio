@@ -3,10 +3,10 @@ import React from "react";
 const ProductSkeleton = () => {
   return (
     <div className="animate-pulse">
-      <div className="aspect-[3/4] rounded-2xl bg-[#FFD6E0]/40" />
+      <div className="aspect-[3/4] rounded-2xl bg-[#CBD1F2]/40" />
       <div className="mt-3 px-1 flex flex-col gap-2">
-        <div className="h-3 bg-[#FFD6E0]/40 rounded-full w-3/4" />
-        <div className="h-3 bg-[#FFD6E0]/40 rounded-full w-1/2 ml-auto" />
+        <div className="h-3 bg-[#CBD1F2]/40 rounded-full w-3/4" />
+        <div className="h-3 bg-[#CBD1F2]/40 rounded-full w-1/2 ml-auto" />
       </div>
     </div>
   );

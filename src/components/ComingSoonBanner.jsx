@@ -32,7 +32,7 @@ const ComingSoonBanner = () => {
       {/* 🌟 TIÊU ĐỀ BẮT MẮT CÓ ANIMATION */}
       <div className="text-center mb-10 flex flex-col items-center">
         {/* Tag nhỏ xinh phía trên */}
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-[#FFD6E0]/50 text-[#FF85A1] border border-[#FFB7C5]/40 mb-2 animate-pulse">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-[#CBD1F2]/50 text-[#8B98E3] border border-[#8B98E3]/40 mb-2 animate-pulse">
           ✦ Upcoming Release ✦
         </span>
 
@@ -40,7 +40,7 @@ const ComingSoonBanner = () => {
         <h2 className="text-3xl md:text-5xl font-extrabold text-[#4A4A6A] flex items-center justify-center gap-2">
           <span
             style={{ fontFamily: "'Dancing Script', cursive" }}
-            className="bg-gradient-to-r from-[#FF85A1] via-[#FFB7C5] to-[#4A4A6A] bg-clip-text text-transparent drop-shadow-sm pr-1"
+            className="bg-gradient-to-r from-[#8B98E3] via-[#8B98E3] to-[#4A4A6A] bg-clip-text text-transparent drop-shadow-sm pr-1"
           >
             Sắp ra mắt
           </span>
@@ -68,7 +68,7 @@ const ComingSoonBanner = () => {
             : null;
 
           const CardContent = (
-            <div className="relative rounded-[2rem] overflow-hidden group cursor-pointer border-2 border-[#FFD6E0]/60 shadow-md hover:shadow-2xl transition-all duration-500 bg-[#FFF0F5]">
+            <div className="relative rounded-[2rem] overflow-hidden group cursor-pointer border-2 border-[#CBD1F2]/60 shadow-md hover:shadow-2xl transition-all duration-500 bg-[#E8EAF9]">
               {/* Khung chứa ảnh */}
               <div
                 className={`w-full overflow-hidden ${
@@ -91,14 +91,14 @@ const ComingSoonBanner = () => {
               {/* 🏷️ TAG PHÂN LOẠI (Góc trái) */}
               {banner.badge && (
                 <div className="absolute top-4 left-4 backdrop-blur-md bg-white/90 text-[#4A4A6A] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-md border border-white/60 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#FF85A1]" />
+                  <span className="w-2 h-2 rounded-full bg-[#8B98E3]" />
                   {banner.badge}
                 </div>
               )}
 
               {/* ⏱️ ĐỒNG HỒ ĐẾM NGƯỢC NỔI BẬT (Góc phải) */}
               {daysLeft !== null && daysLeft > 0 && (
-                <div className="absolute top-4 right-4 backdrop-blur-md bg-gradient-to-r from-[#FF85A1] to-[#FFB7C5] text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg border border-white/40 flex items-center gap-2 group-hover:scale-105 transition-transform duration-300">
+                <div className="absolute top-4 right-4 backdrop-blur-md bg-gradient-to-r from-[#8B98E3] to-[#8B98E3] text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg border border-white/40 flex items-center gap-2 group-hover:scale-105 transition-transform duration-300">
                   {/* Đèn LED đỏ nhấp nháy báo động live */}
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
@@ -116,7 +116,7 @@ const ComingSoonBanner = () => {
 
               {/* 📝 NỘI DUNG CHỮ PHÍA DƯỚI */}
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7 text-white transform transition-transform duration-300 group-hover:-translate-y-1">
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight drop-shadow-md mb-1.5 group-hover:text-[#FFD6E0] transition-colors">
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight drop-shadow-md mb-1.5 group-hover:text-[#CBD1F2] transition-colors">
                   {banner.title}
                 </h3>
                 {banner.description && (

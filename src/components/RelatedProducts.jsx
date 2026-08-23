@@ -17,10 +17,10 @@ const RelatedProducts = ({ category, currentId }) => {
   if (related.length === 0) return null;
 
   return (
-    <section className="mt-20 border-t border-[#FFD6E0]/50 pt-12">
+    <section className="mt-20 border-t border-[#CBD1F2]/50 pt-12">
       {/* 🌟 Tiêu đề dễ thương */}
       <div className="text-center mb-8 flex flex-col items-center">
-        <span className="text-[11px] font-bold text-[#FF85A1] bg-[#FFF0F5] px-3 py-1 rounded-full border border-[#FFD6E0] mb-2 tracking-wide uppercase">
+        <span className="text-[11px] font-bold text-[#8B98E3] bg-[#E8EAF9] px-3 py-1 rounded-full border border-[#CBD1F2] mb-2 tracking-wide uppercase">
           ✨ Gợi ý dành riêng cho bạn
         </span>
         <h2
@@ -122,10 +122,10 @@ export default RelatedProducts;
 //   if (related.length === 0) return null;
 
 //   return (
-//     <section className="mt-20 border-t border-[#FFD6E0]/50 pt-12">
+//     <section className="mt-20 border-t border-[#CBD1F2]/50 pt-12">
 //       {/* 🌟 Tiêu đề dễ thương */}
 //       <div className="text-center mb-8 flex flex-col items-center">
-//         <span className="text-[11px] font-bold text-[#FF85A1] bg-[#FFF0F5] px-3 py-1 rounded-full border border-[#FFD6E0] mb-2 tracking-wide uppercase">
+//         <span className="text-[11px] font-bold text-[#8B98E3] bg-[#E8EAF9] px-3 py-1 rounded-full border border-[#CBD1F2] mb-2 tracking-wide uppercase">
 //           ✨ Gợi ý dành riêng cho bạn
 //         </span>
 //         <h2

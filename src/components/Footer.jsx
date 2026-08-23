@@ -130,7 +130,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3 text-sm text-[#4A4A6A]/65">
             <div className="flex items-center gap-2">
               <span>📧</span>
-              <span>hello@momomelody.vn</span>
+              <span>momomeomeow.68@gmail.com</span>
             </div>
             <div className="flex items-center gap-2">
               <span>📞</span>

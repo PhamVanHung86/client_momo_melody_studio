@@ -49,7 +49,8 @@ const ProductReviews = ({ productId, ratingAvg = 0, ratingCount = 0 }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
-  const myReview = reviews.find((r) => r.user?._id === user?.id);
+  const myId = user?._id || user?.id;
+  const myReview = reviews.find((r) => r.user?._id === myId);
 
   useEffect(() => {
     if (myReview) {
@@ -85,8 +86,10 @@ const ProductReviews = ({ productId, ratingAvg = 0, ratingCount = 0 }) => {
   };
 
   return (
-    <div className="mt-12 border-t border-[#FFD6E0]/40 pt-8">
-      <h2 className="text-xl font-bold text-[#4A4A6A] mb-1">Đánh giá sản phẩm</h2>
+    <div className="mt-12 border-t border-[#CBD1F2]/40 pt-8">
+      <h2 className="text-xl font-bold text-[#4A4A6A] mb-1">
+        Đánh giá sản phẩm
+      </h2>
       {ratingCount > 0 ? (
         <div className="flex items-center gap-2 mb-6">
           <StarRating value={Math.round(ratingAvg)} />
@@ -103,7 +106,7 @@ const ProductReviews = ({ productId, ratingAvg = 0, ratingCount = 0 }) => {
       {user ? (
         <form
           onSubmit={handleSubmit}
-          className="bg-[#FFF7FA] rounded-2xl p-4 mb-6 border border-[#FFD6E0]/50"
+          className="bg-[#FFF7FA] rounded-2xl p-4 mb-6 border border-[#CBD1F2]/50"
         >
           <p className="text-sm font-medium text-[#4A4A6A] mb-2">
             {myReview ? "Sửa đánh giá của bạn" : "Viết đánh giá của bạn"}
@@ -115,15 +118,19 @@ const ProductReviews = ({ productId, ratingAvg = 0, ratingCount = 0 }) => {
             placeholder="Chia sẻ cảm nhận của bạn về sản phẩm này..."
             rows={3}
             maxLength={1000}
-            className="w-full mt-3 p-3 rounded-xl border border-[#FFD6E0]/60 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B81]/40 resize-none"
+            className="w-full mt-3 p-3 rounded-xl border border-[#CBD1F2]/60 text-sm focus:outline-none focus:ring-2 focus:ring-[#8B98E3]/40 resize-none"
           />
           {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
           <button
             type="submit"
             disabled={submitting}
-            className="mt-2 bg-[#FF6B81] text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-[#FF5069] transition-colors disabled:opacity-50"
+            className="mt-2 bg-[#8B98E3] text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-[#FF5069] transition-colors disabled:opacity-50"
           >
-            {submitting ? "Đang gửi..." : myReview ? "Cập nhật" : "Gửi đánh giá"}
+            {submitting
+              ? "Đang gửi..."
+              : myReview
+                ? "Cập nhật"
+                : "Gửi đánh giá"}
           </button>
           <p className="text-[11px] text-[#4A4A6A]/40 mt-2">
             Bạn cần đã mua sản phẩm này để có thể đánh giá.
@@ -131,7 +138,7 @@ const ProductReviews = ({ productId, ratingAvg = 0, ratingCount = 0 }) => {
         </form>
       ) : (
         <p className="text-sm text-[#4A4A6A]/60 mb-6">
-          <Link to="/login" className="text-[#FF6B81] font-medium">
+          <Link to="/login" className="text-[#8B98E3] font-medium">
             Đăng nhập
           </Link>{" "}
           để viết đánh giá
@@ -150,7 +157,7 @@ const ProductReviews = ({ productId, ratingAvg = 0, ratingCount = 0 }) => {
           {reviews.map((r) => (
             <div
               key={r._id}
-              className="border-b border-[#FFD6E0]/30 pb-4 last:border-0"
+              className="border-b border-[#CBD1F2]/30 pb-4 last:border-0"
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm font-medium text-[#4A4A6A]">

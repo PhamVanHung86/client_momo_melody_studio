@@ -58,7 +58,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-[#FFFAF5] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-3xl p-8 shadow-sm border border-[#FFD6E0]/50">
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-[#CBD1F2]/50">
           {/* Tiêu đề */}
           <div className="text-center mb-8">
             <h1
@@ -69,7 +69,7 @@ const Login = () => {
             </h1>
             <p className="text-xs text-[#4A4A6A]/50">
               {isLogin
-                ? "Đăng nhập để tiếp tục mua sắm 🩷"
+                ? "Đăng nhập để tiếp tục mua sắm 🩵"
                 : "Đăng ký để theo dõi đơn hàng 🎀"}
             </p>
           </div>
@@ -91,7 +91,7 @@ const Login = () => {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Nguyễn Văn A"
-                  className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-[#FFFAF5]"
+                  className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-[#FFFAF5]"
                 />
               </div>
             )}
@@ -104,7 +104,7 @@ const Login = () => {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="momo@example.com"
-                className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-[#FFFAF5]"
+                className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-[#FFFAF5]"
               />
             </div>
 
@@ -117,12 +117,12 @@ const Login = () => {
                 onChange={handleChange}
                 onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                 placeholder="••••••••"
-                className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-[#FFFAF5]"
+                className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-[#FFFAF5]"
               />
             </div>
 
             {isLogin && (
-              <p className="text-xs text-right text-[#FFB7C5] cursor-pointer hover:underline">
+              <p className="text-xs text-right text-[#8B98E3] cursor-pointer hover:underline">
                 Quên mật khẩu?
               </p>
             )}
@@ -131,7 +131,7 @@ const Login = () => {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="mt-2 w-full bg-[#FFB7C5] text-white py-3 rounded-2xl text-sm font-semibold hover:bg-[#ff9db5] active:scale-95 transition-all disabled:opacity-60"
+              className="mt-2 w-full bg-[#8B98E3] text-white py-3 rounded-2xl text-sm font-semibold hover:bg-[#8B98E3] active:scale-95 transition-all disabled:opacity-60"
             >
               {loading
                 ? "Đang xử lý..."
@@ -142,15 +142,15 @@ const Login = () => {
 
             {/* Divider */}
             <div className="flex items-center gap-3 my-1">
-              <hr className="flex-1 border-[#FFD6E0]" />
+              <hr className="flex-1 border-[#CBD1F2]" />
               <span className="text-xs text-[#4A4A6A]/40">hoặc</span>
-              <hr className="flex-1 border-[#FFD6E0]" />
+              <hr className="flex-1 border-[#CBD1F2]" />
             </div>
 
             {/* Google */}
             <button
               onClick={loginWithGoogle}
-              className="disable w-full flex items-center justify-center gap-3 border border-[#FFD6E0] py-3 rounded-2xl text-sm text-[#4A4A6A] hover:bg-[#FFF0F5] transition-colors"
+              className="disable w-full flex items-center justify-center gap-3 border border-[#CBD1F2] py-3 rounded-2xl text-sm text-[#4A4A6A] hover:bg-[#E8EAF9] transition-colors"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -182,7 +182,7 @@ const Login = () => {
                 setIsLogin(!isLogin);
                 setError("");
               }}
-              className="text-[#FFB7C5] font-medium cursor-pointer hover:underline ml-1"
+              className="text-[#8B98E3] font-medium cursor-pointer hover:underline ml-1"
             >
               {isLogin ? "Đăng ký ngay" : "Đăng nhập"}
             </span>

@@ -48,7 +48,7 @@ const FlashSaleBanner = () => {
   return (
     <div className="mx-4 sm:mx-[5vw] md:mx-[7vw] lg:mx-[9vw] my-14">
       {/* Khung Banner Chính - Dải màu Gradient Pastel + Bóng đổ Glow */}
-      <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-[#8EC5FC] via-[#B490CA] to-[#FBC2EB] p-6 sm:p-8 md:p-10 shadow-xl shadow-[#FF85A1]/20 border border-white/40">
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-[#8EC5FC] via-[#B490CA] to-[#FBC2EB] p-6 sm:p-8 md:p-10 shadow-xl shadow-[#8B98E3]/20 border border-white/40">
         {/* 🌟 Vệt sáng trang trí background (Aura Glow) */}
         <div className="absolute -top-24 -left-24 w-60 h-60 bg-white/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -right-24 w-60 h-60 bg-[#FF3B60]/20 rounded-full blur-3xl pointer-events-none" />
@@ -123,7 +123,7 @@ const FlashSaleBanner = () => {
                 className="group relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/80"
               >
                 {/* Khung ảnh & Tag giảm giá */}
-                <div className="relative aspect-square overflow-hidden bg-[#FFF0F5]">
+                <div className="relative aspect-square overflow-hidden bg-[#E8EAF9]">
                   <img
                     src={p.images[0]}
                     alt={p.name}

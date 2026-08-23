@@ -6,6 +6,10 @@ import qrCode from "../assets/qr-code.png";
 import { toast } from "react-toastify";
 import LoadingStatusModal from "../components/LoadingStatusModal";
 import { apiFetch } from "../api/client";
+import FireworksButton from "../components/FireworksButton";
+
+// Hằng số ngưỡng miễn phí vận chuyển
+const FREE_SHIPPING_THRESHOLD = 300000;
 
 const PlaceOrder = () => {
   const {
@@ -21,7 +25,7 @@ const PlaceOrder = () => {
   const navigate = useNavigate();
   const { user, syncUser } = useAuth();
 
-  // Tự điền từ profile
+  // Tự điền thông tin người dùng từ profile
   const [form, setForm] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
@@ -29,11 +33,15 @@ const PlaceOrder = () => {
     note: "",
   });
 
-  // Mặc định cố định là thanh toán chuyển khoản
+  // Mặc định cố định phương thức thanh toán chuyển khoản
   const [paymentMethod] = useState("transfer");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  // Tính toán tổng tiền & phí giao hàng (dùng chung cho cả logic gửi đơn và render UI)
+  const subtotal = getCartTotal();
+  const shippingFee = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : delivery_fee;
+  const total = subtotal + shippingFee;
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -48,21 +56,17 @@ const PlaceOrder = () => {
     setLoading(true);
 
     try {
-      // Chuyển cartItems thành items array
+      // Chuyển đổi cartItems sang mảng các sản phẩm trong đơn hàng
       const items = Object.entries(cartItems).map(([id, quantity]) => {
         const product = products.find((p) => p._id === id);
         return {
           product: id,
-          name: product.name,
-          image: product.image[0],
-          price: getProductPrice(id), // dùng giá đã tính sale
+          name: product?.name || "",
+          image: product?.image?.[0] || "",
+          price: getProductPrice(id), // Giá đã tính giảm giá (Flash Sale)
           quantity,
         };
       });
-
-      const subtotal = getCartTotal();
-      const shippingFee = subtotal >= 300000 ? 0 : delivery_fee;
-      const total = subtotal + shippingFee;
 
       const res = await apiFetch("/api/orders", {
         method: "POST",
@@ -80,7 +84,6 @@ const PlaceOrder = () => {
 
       if (data.success) {
         syncUser(data.user);
-        //toast.success("Đặt hàng thành công! Cảm ơn bạn 💕");
         setSubmitted(true);
         clearCart();
         setTimeout(() => navigate("/orders"), 2500);
@@ -94,11 +97,6 @@ const PlaceOrder = () => {
     }
   };
 
-  const subtotal = getCartTotal();
-  const FREE_SHIPPING_THRESHOLD = 300000;
-  const shippingFee = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : delivery_fee;
-  const total = subtotal + shippingFee;
-
   if (submitted) {
     return (
       <LoadingStatusModal
@@ -110,14 +108,6 @@ const PlaceOrder = () => {
     );
   }
 
-  // <CuteStatusModal
-  //     isOpen={submitted}
-  //     title="Đặt hàng thành công!"
-  //     subtitle="Cảm ơn bạn đã ghé thăm studio ☁️"
-  //     statusText="Đang chuyển đến trang đơn hàng..."
-  //     logoSrc="/my-logo.png" // 👈 Đường dẫn tính từ thư mục public
-  //     badge="✨"
-  //   />
   return (
     <div className="min-h-screen bg-[#FFFAF5] px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] py-12">
       <h1
@@ -131,40 +121,40 @@ const PlaceOrder = () => {
         {/* CỘT TRÁI: FORM ĐỊA CHỈ & THÔNG TIN CHUYỂN KHOẢN */}
         <div className="flex-1 flex flex-col gap-6">
           {/* Form địa chỉ */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#FFD6E0]/50 flex flex-col gap-4">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#CBD1F2]/50 flex flex-col gap-4">
             <h2 className="text-sm font-semibold text-[#4A4A6A] tracking-widest uppercase">
               Thông tin giao hàng
             </h2>
 
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#4A4A6A]/60">
-                Họ và tên <span className="text-[#FFB7C5]">*</span>
+                Họ và tên <span className="text-[#8B98E3]">*</span>
               </label>
               <input
                 name="name"
                 value={form.name}
                 onChange={handleChange}
                 placeholder="Nguyễn Văn A"
-                className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-[#FFFAF5]"
+                className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-[#FFFAF5]"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#4A4A6A]/60">
-                Số điện thoại <span className="text-[#FFB7C5]">*</span>
+                Số điện thoại <span className="text-[#8B98E3]">*</span>
               </label>
               <input
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="0901 234 567"
-                className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-[#FFFAF5]"
+                className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-[#FFFAF5]"
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#4A4A6A]/60">
-                Địa chỉ giao hàng <span className="text-[#FFB7C5]">*</span>
+                Địa chỉ giao hàng <span className="text-[#8B98E3]">*</span>
               </label>
               <textarea
                 name="address"
@@ -172,7 +162,7 @@ const PlaceOrder = () => {
                 onChange={handleChange}
                 placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"
                 rows={3}
-                className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-[#FFFAF5] resize-none"
+                className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-[#FFFAF5] resize-none"
               />
             </div>
 
@@ -186,27 +176,26 @@ const PlaceOrder = () => {
                 onChange={handleChange}
                 placeholder="Yêu cầu đặc biệt, màu sắc, thiết kế..."
                 rows={2}
-                className="border border-[#FFD6E0] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] bg-[#FFFAF5] resize-none"
+                className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-[#FFFAF5] resize-none"
               />
             </div>
           </div>
 
           {/* Phương thức thanh toán Chuyển Khoản Ngân Hàng */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#FFD6E0]/50">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#CBD1F2]/50">
             <h2 className="text-sm font-semibold text-[#4A4A6A] tracking-widest uppercase mb-4 flex items-center gap-2">
               <span>🏦</span> Phương thức thanh toán
             </h2>
 
-            <div className="bg-[#FFFAF5] p-5 rounded-2xl border border-[#FFD6E0]/80">
+            <div className="bg-[#FFFAF5] p-5 rounded-2xl border border-[#CBD1F2]/80">
               <div className="flex items-center gap-2 text-sm font-medium text-[#4A4A6A]">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#8B98E3]" />
                 Chuyển khoản Ngân hàng (QR Code)
               </div>
 
               {/* KHU VỰC QR CODE VÀ THÔNG TIN TÀI KHOẢN */}
-              <div className="mt-4 pt-4 border-t border-[#FFD6E0]/60 flex flex-col sm:flex-row items-center gap-6">
-                {/* QR Code lấy từ assets */}
-                <div className="flex flex-col items-center bg-white p-3 rounded-2xl border border-[#FFD6E0] shadow-sm flex-shrink-0">
+              <div className="mt-4 pt-4 border-t border-[#CBD1F2]/60 flex flex-col sm:flex-row items-center gap-6">
+                <div className="flex flex-col items-center bg-white p-3 rounded-2xl border border-[#CBD1F2] shadow-sm flex-shrink-0">
                   <img
                     src={qrCode}
                     alt="Mã QR Chuyển khoản"
@@ -217,9 +206,8 @@ const PlaceOrder = () => {
                   </span>
                 </div>
 
-                {/* Thông tin tài khoản chi tiết */}
                 <div className="flex-1 w-full flex flex-col gap-2.5 text-xs text-[#4A4A6A]">
-                  <div className="bg-white p-3 rounded-xl border border-[#FFD6E0]/40">
+                  <div className="bg-white p-3 rounded-xl border border-[#CBD1F2]/40">
                     <span className="text-[#4A4A6A]/60 block text-[11px] mb-0.5">
                       Ngân hàng:
                     </span>
@@ -228,7 +216,7 @@ const PlaceOrder = () => {
                     </span>
                   </div>
 
-                  <div className="bg-white p-3 rounded-xl border border-[#FFD6E0]/40">
+                  <div className="bg-white p-3 rounded-xl border border-[#CBD1F2]/40">
                     <span className="text-[#4A4A6A]/60 block text-[11px] mb-0.5">
                       Số tài khoản:
                     </span>
@@ -237,7 +225,7 @@ const PlaceOrder = () => {
                     </span>
                   </div>
 
-                  <div className="bg-white p-3 rounded-xl border border-[#FFD6E0]/40">
+                  <div className="bg-white p-3 rounded-xl border border-[#CBD1F2]/40">
                     <span className="text-[#4A4A6A]/60 block text-[11px] mb-0.5">
                       Chủ tài khoản:
                     </span>
@@ -246,7 +234,7 @@ const PlaceOrder = () => {
                     </span>
                   </div>
 
-                  <p className="text-[11px] text-[#4A4A6A]/70 italic mt-1 bg-[#FFD6E0]/20 p-2.5 rounded-xl border border-[#FFD6E0]/40">
+                  <p className="text-[11px] text-[#4A4A6A]/70 italic mt-1 bg-[#CBD1F2]/20 p-2.5 rounded-xl border border-[#CBD1F2]/40">
                     💡 <span className="font-medium">Nội dung CK:</span>{" "}
                     <span className="text-[#8B98E3] font-semibold">
                       {form.phone
@@ -262,7 +250,7 @@ const PlaceOrder = () => {
 
         {/* CỘT PHẢI: TÓM TẮT ĐƠN HÀNG */}
         <div className="w-full lg:w-80 flex-shrink-0">
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#FFD6E0]/50 sticky top-[120px]">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-[#CBD1F2]/50 sticky top-[120px]">
             <h2
               style={{ fontFamily: "'Dancing Script', cursive" }}
               className="text-2xl text-[#4A4A6A] mb-6"
@@ -296,26 +284,26 @@ const PlaceOrder = () => {
                 </p>
               )}
 
-              <hr className="border-[#FFD6E0] my-1" />
+              <hr className="border-[#CBD1F2] my-1" />
               <div className="flex justify-between font-semibold text-base">
                 <span>Tổng cộng</span>
-                <span className="text-[#FFB7C5]">
+                <span className="text-[#8B98E3]">
                   {total.toLocaleString()} {currency}
                 </span>
               </div>
             </div>
 
-            <button
+            <FireworksButton
               onClick={handleOrder}
               disabled={!form.name || !form.phone || !form.address || loading}
-              className="mt-6 w-full bg-[#FFB7C5] text-white py-3 rounded-2xl text-sm font-semibold hover:bg-[#ff9db5] transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
+              className="mt-6 w-full text-sm"
             >
               {loading ? "Đang xử lý..." : "Xác nhận đã chuyển khoản 🎀"}
-            </button>
+            </FireworksButton>
 
             <button
               onClick={() => navigate("/cart")}
-              className="mt-3 w-full text-center text-xs text-[#4A4A6A]/50 hover:text-[#FFB7C5] transition-colors"
+              className="mt-3 w-full text-center text-xs text-[#4A4A6A]/50 hover:text-[#8B98E3] transition-colors"
             >
               ← Quay lại giỏ hàng
             </button>

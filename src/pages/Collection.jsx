@@ -25,7 +25,11 @@ const SORT_OPTIONS = [
 ];
 
 const Collection = () => {
-  const { products = [], loadingProducts } = useContext(ShopContext);
+  const {
+    products = [],
+    loadingProducts,
+    fetchProducts,
+  } = useContext(ShopContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const urlSearchQuery = searchParams.get("search") || "";
@@ -123,7 +127,7 @@ const Collection = () => {
 
       <div className="min-h-screen bg-[#FFFAF5]">
         {/* Banner */}
-        <div className="bg-[#FFD6E0] py-14 sm:-mt-5 sm:pt-20 text-center px-4">
+        <div className="bg-[#CBD1F2] py-14 sm:-mt-5 sm:pt-20 text-center px-4">
           <span className="text-5xl">🛍️</span>
           <h1
             style={{ fontFamily: "'Dancing Script', cursive" }}
@@ -132,7 +136,7 @@ const Collection = () => {
             Tất cả sản phẩm
           </h1>
           <p className="text-sm text-[#4A4A6A]/70 mt-2">
-            {filtered.length} sản phẩm handmade dễ thương đang chờ bạn 🩷
+            {filtered.length} sản phẩm handmade dễ thương đang chờ bạn 🩵
           </p>
         </div>
 
@@ -146,13 +150,13 @@ const Collection = () => {
                 value={searchInput}
                 onChange={handleSearchChange}
                 placeholder="Tìm kiếm sản phẩm... 🔍"
-                className="w-full border border-[#FFD6E0] rounded-2xl px-5 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-white"
+                className="w-full border border-[#CBD1F2] rounded-2xl px-5 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-white"
               />
               {searchInput && (
                 <button
                   type="button"
                   onClick={handleClearSearch}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#4A4A6A]/40 hover:text-[#FFB7C5] transition-colors text-lg"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#4A4A6A]/40 hover:text-[#8B98E3] transition-colors text-lg"
                 >
                   ×
                 </button>
@@ -163,7 +167,7 @@ const Collection = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="border border-[#FFD6E0] rounded-2xl px-5 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5] transition-colors bg-white cursor-pointer"
+              className="border border-[#CBD1F2] rounded-2xl px-5 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] transition-colors bg-white cursor-pointer"
             >
               {SORT_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -181,8 +185,8 @@ const Collection = () => {
                 onClick={() => setActiveCategory(cat.value)}
                 className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
                   activeCategory === cat.value
-                    ? "bg-[#FFB7C5] text-white shadow-sm"
-                    : "bg-white text-[#4A4A6A] border border-[#FFD6E0] hover:border-[#FFB7C5]"
+                    ? "bg-[#8B98E3] text-white shadow-sm"
+                    : "bg-white text-[#4A4A6A] border border-[#CBD1F2] hover:border-[#8B98E3]"
                 }`}
               >
                 {cat.label}
@@ -193,6 +197,22 @@ const Collection = () => {
           {/* Danh sách sản phẩm & Phân trang */}
           {loadingProducts ? (
             <ProductGridSkeleton count={8} />
+          ) : products.length === 0 ? (
+            <div className="text-center py-24">
+              <span className="text-6xl">😿</span>
+              <p
+                style={{ fontFamily: "'Dancing Script', cursive" }}
+                className="text-2xl text-[#4A4A6A]/60 mt-4"
+              >
+                Không tải được dữ liệu sản phẩm...
+              </p>
+              <button
+                onClick={() => fetchProducts()}
+                className="mt-4 text-sm bg-[#B0B9EC] text-white px-5 py-2.5 rounded-full hover:bg-[#8B98E3] transition-colors"
+              >
+                Thử tải lại
+              </button>
+            </div>
           ) : filtered.length > 0 ? (
             <>
               <p className="text-xs text-[#4A4A6A]/50 mb-6">
@@ -220,7 +240,7 @@ const Collection = () => {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="w-9 h-9 rounded-full border border-[#FFD6E0] text-[#4A4A6A] text-sm hover:bg-[#FFD6E0] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                    className="w-9 h-9 rounded-full border border-[#CBD1F2] text-[#4A4A6A] text-sm hover:bg-[#CBD1F2] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
                   >
                     ←
                   </button>
@@ -240,8 +260,8 @@ const Collection = () => {
                           onClick={() => handlePageChange(page)}
                           className={`w-9 h-9 rounded-full text-sm font-medium transition-all ${
                             currentPage === page
-                              ? "bg-[#FFB7C5] text-white shadow-sm"
-                              : "border border-[#FFD6E0] text-[#4A4A6A] hover:bg-[#FFD6E0]"
+                              ? "bg-[#8B98E3] text-white shadow-sm"
+                              : "border border-[#CBD1F2] text-[#4A4A6A] hover:bg-[#CBD1F2]"
                           }`}
                         >
                           {page}
@@ -253,7 +273,7 @@ const Collection = () => {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="w-9 h-9 rounded-full border border-[#FFD6E0] text-[#4A4A6A] text-sm hover:bg-[#FFD6E0] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                    className="w-9 h-9 rounded-full border border-[#CBD1F2] text-[#4A4A6A] text-sm hover:bg-[#CBD1F2] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
                   >
                     →
                   </button>
@@ -275,7 +295,7 @@ const Collection = () => {
                   handleClearSearch();
                   setActiveCategory("all");
                 }}
-                className="mt-4 text-sm text-[#FFB7C5] hover:underline"
+                className="mt-4 text-sm text-[#8B98E3] hover:underline"
               >
                 Xóa bộ lọc
               </button>

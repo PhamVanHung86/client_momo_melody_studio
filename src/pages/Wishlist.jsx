@@ -44,7 +44,7 @@ const Wishlist = () => {
           <p className="mb-4">Đăng nhập để xem danh sách yêu thích của bạn</p>
           <Link
             to="/login"
-            className="inline-block bg-[#FF6B81] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#FF5069] transition-colors"
+            className="inline-block bg-[#8B98E3] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#FF5069] transition-colors"
           >
             Đăng nhập
           </Link>
@@ -56,7 +56,7 @@ const Wishlist = () => {
           <p className="mb-4">Bạn chưa thích sản phẩm nào cả 🤍</p>
           <Link
             to="/collection"
-            className="inline-block bg-[#FF6B81] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#FF5069] transition-colors"
+            className="inline-block bg-[#8B98E3] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#FF5069] transition-colors"
           >
             Khám phá sản phẩm
           </Link>

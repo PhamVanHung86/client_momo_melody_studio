@@ -5,6 +5,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import NightSkyBackground, {
+  useStarField,
+  useShootingStars,
+} from "./NightSkyBackground";
 
 const slides = [
   {
@@ -37,6 +41,9 @@ const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
+  const stars = useStarField();
+  const shootingStars = useShootingStars(stars);
+
   const handleTabClick = (index) => {
     if (swiperRef.current) {
       swiperRef.current.slideToLoop(index);
@@ -44,24 +51,27 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[88vh] bg-[url('/images/bg-mobile.jpg')] bg-no-repeat bg-cover bg:content py-10 md:py-16 px-4 sm:px-8 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-[88vh] py-10 md:py-16 px-4 sm:px-8 sm:mt-7 flex items-center justify-center overflow-hidden">
+      {/* 🌌 Nền sao băng thay cho ảnh bg-mobile.jpg cũ */}
+      <NightSkyBackground stars={stars} shootingStars={shootingStars} />
+
       {/* 🌸 Các phần tử trang trí bồng bềnh xung quanh bàn làm việc */}
-      <div className="absolute top-12 right-12 text-3xl animate-bounce duration-[4000ms] opacity-70 select-none pointer-events-none -rotate-12">
+      <div className="absolute top-12 right-12 text-3xl animate-bounce duration-[4000ms] opacity-70 select-none pointer-events-none -rotate-12 z-10">
         <img
           src="/logo_red.png"
           alt="Logo"
           className="w-10 h-10 object-contain drop-shadow-sm"
         />
       </div>
-      {/* 📖 BÌA SỔ CHÍNH (OPEN JOURNAL / BINDER) */}
-      <div className="relative max-w-5xl w-full mx-auto my-auto flex flex-col md:flex-row items-stretch bg-[#FFFDF9] bg-[radial-gradient(#E8DFD1_1px,transparent_1px)] [background-size:18px_18px] rounded-3xl shadow-[0_20px_50px_rgba(74,74,106,0.12)] border-2 border-[#F0E6D8] p-6 sm:p-10 md:p-12">
+      {/* 📖 BÌA SỔ CHÍNH (OPEN JOURNAL / BINDER) — nền trong suốt để lộ trời sao */}
+      <div className="relative z-10 max-w-5xl w-full mx-auto my-auto flex flex-col md:flex-row items-stretch bg-transparent rounded-3xl border-2 border-white/15 backdrop-blur-sm p-6 sm:p-10 md:p-12">
         {/* 📚 THẺ ĐÁNH DẤU TRANG STICKY TABS (Nhô ra ở cạnh phải) */}
         <div className="absolute -right-3 md:-right-5 top-12 flex flex-col gap-3 z-30">
           {slides.map((slide, i) => (
             <button
               key={i}
               onClick={() => handleTabClick(i)}
-              className={`px-3 py-1.5 md:py-2 text-[10px] md:text-xs font-bold text-[#4A4A6A] rounded-r-xl border-y border-r border-[#4A4A6A]/10 shadow-sm transition-all duration-300 flex items-center gap-1 ${
+              className={`px-3 py-1.5 md:py-2 text-[10px] md:text-xs font-bold text-[#2B2B42] rounded-r-xl border-y border-r border-white/20 shadow-sm transition-all duration-300 flex items-center gap-1 ${
                 slide.tabColor
               } ${
                 activeIndex === i
@@ -81,7 +91,7 @@ const Hero = () => {
         <div className="w-full md:w-1/2 flex flex-col justify-between gap-6 pr-0 md:pr-8 z-10">
           <div key={activeIndex} className="space-y-4 animate-fadeIn">
             {/* Tag Thẻ Tape dán góc */}
-            <div className="inline-flex items-center gap-2 bg-[#FF85A1]/15 text-[#FF85A1] border border-[#FF85A1]/30 px-3.5 py-1 rounded-md text-[11px] font-black uppercase tracking-wider -rotate-1 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-[#8B98E3]/15 text-[#8B98E3] border border-[#8B98E3]/30 px-3.5 py-1 rounded-md text-[11px] font-black uppercase tracking-wider -rotate-1 shadow-sm">
               <span>📌</span>
               <span>{slides[activeIndex].tag}</span>
             </div>
@@ -89,20 +99,20 @@ const Hero = () => {
             {/* Tiêu đề viết tay dạng Nhật Ký */}
             <h1
               style={{ fontFamily: "'Dancing Script', cursive" }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#4A4A6A] leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
             >
               {slides[activeIndex].title}
             </h1>
 
             {/* Dòng kẻ tay trang trí */}
             <div className="flex items-center gap-2">
-              <div className="w-10 h-[2px] bg-[#FF85A1]" />
-              <div className="w-2 h-[2px] bg-[#FFB7C5]" />
-              <div className="w-2 h-[2px] bg-[#FFD6E0]" />
+              <div className="w-10 h-[2px] bg-[#8B98E3]" />
+              <div className="w-2 h-[2px] bg-[#8B98E3]" />
+              <div className="w-2 h-[2px] bg-[#CBD1F2]" />
             </div>
 
             {/* Đoạn mô tả mộc mạc */}
-            <p className="text-sm md:text-base text-[#4A4A6A]/80 font-normal leading-relaxed">
+            <p className="text-sm md:text-base text-white/80 font-normal leading-relaxed">
               {slides[activeIndex].desc}
             </p>
           </div>
@@ -111,15 +121,15 @@ const Hero = () => {
           <div className="flex items-center justify-between gap-4 pt-2">
             <Link
               to={slides[activeIndex].link}
-              className="inline-flex items-center gap-2 bg-[#4A4A6A] hover:bg-[#FF85A1] text-white text-xs font-bold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wider"
+              className="inline-flex items-center gap-2 bg-slate-900/60 hover:bg-slate-800/70 backdrop-blur-md border border-slate-700 text-white text-xs font-bold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wider"
             >
               <span>{slides[activeIndex].span}</span>
               <span>→</span>
             </Link>
 
             {/* Dấu tem tròn Vintage (Postal Stamp) */}
-            <div className="hidden sm:flex w-14 h-14 rounded-full border-2 border-dashed border-[#FF85A1]/50 items-center justify-center rotate-12 p-1 text-center bg-white/60 shadow-sm pointer-events-none">
-              <span className="text-[8px] font-black tracking-widest text-[#FF85A1] uppercase leading-tight">
+            <div className="hidden sm:flex w-14 h-14 rounded-full border-dashed border-[#8B98E3]/50 items-center justify-center rotate-12 p-1 text-center bg-slate-900/60 hover:bg-slate-800/70 backdrop-blur-md border border-slate-700 shadow-sm pointer-events-none">
+              <span className="text-[8px] font-black tracking-widest text-[#8B98E3] uppercase leading-tight">
                 {slides[activeIndex].stampText}
               </span>
             </div>
@@ -133,8 +143,8 @@ const Hero = () => {
                 onClick={() => handleTabClick(i)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   activeIndex === i
-                    ? "w-6 bg-[#FF85A1]"
-                    : "w-2 bg-[#4A4A6A]/20 hover:bg-[#FF85A1]/40"
+                    ? "w-6 bg-[#8B98E3]"
+                    : "w-2 bg-white/30 hover:bg-[#8B98E3]/60"
                 }`}
               />
             ))}
@@ -166,7 +176,7 @@ const Hero = () => {
             />
 
             {/* Tag Badge Nổi ở góc ảnh */}
-            <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md text-[#4A4A6A] text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-[#FFD6E0]">
+            <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-md text-[#4A4A6A] text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-[#CBD1F2]">
               {slides[activeIndex].badge}
             </div>
 
@@ -179,7 +189,7 @@ const Hero = () => {
               speed={800}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-              className="w-full aspect-[4/3] sm:aspect-[1/1] rounded-xl overflow-hidden bg-[#FFF0F5]"
+              className="w-full aspect-[4/3] sm:aspect-[1/1] rounded-xl overflow-hidden bg-[#E8EAF9]"
             >
               {slides.map((slide, i) => (
                 <SwiperSlide key={i}>
@@ -199,7 +209,7 @@ const Hero = () => {
               </span>
               <span
                 style={{ fontFamily: "'Dancing Script', cursive" }}
-                className="text-sm font-bold text-[#FF85A1]"
+                className="text-sm font-bold text-[#8B98E3]"
               >
                 Momo's Journal 💖
               </span>

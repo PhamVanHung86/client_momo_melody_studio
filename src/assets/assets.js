@@ -8,8 +8,8 @@ import menu_icon from "./menu_icon.png";
 import about_img from "./about_img.png";
 import contact_img from "./contact_img.png";
 
-import home_7 from "./home_7.png";
-import hero_7 from "./hero_7.png";
+import hero_7 from "./hero_mailclub.JPG";
+import home_7 from "./hero_all.JPG";
 
 export const assets = {
   cart_icon,

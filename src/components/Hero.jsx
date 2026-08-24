@@ -21,19 +21,19 @@ const slides = [
     tabColor: "bg-[#C8E6C9]",
     tapeColor: "bg-[#C8E6C9]/80",
     stampText: "MAIL CLUB",
-    span: "Buy artwork",
+    span: "Join mailclub",
   },
   {
     img: assets.home_7,
     tag: "Momo's Studio",
-    title: "Momo's Melody",
+    title: "All Artworks",
     desc: "Tất cả sản phẩm đều được chăm chút tỉ mỉ với tất cả tình yêu thương gửi tới bạn.",
     link: "/collection",
     badge: "💖 Made With Love",
     tabColor: "bg-[#E1BEE7]",
     tapeColor: "bg-[#E1BEE7]/80",
     stampText: "WITH LOVE",
-    span: "Khám phá ngay",
+    span: "Buy artwork",
   },
 ];
 
@@ -121,7 +121,7 @@ const Hero = () => {
           <div className="flex items-center justify-between gap-4 pt-2">
             <Link
               to={slides[activeIndex].link}
-              className="inline-flex items-center gap-2 bg-slate-900/60 hover:bg-slate-800/70 backdrop-blur-md border border-slate-700 text-white text-xs font-bold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wider"
+              className="inline-flex items-center gap-2 bg-[#8B98E3] hover:bg-slate-800/70 backdrop-blur-md border border-slate-700 text-white text-xs font-bold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wider"
             >
               <span>{slides[activeIndex].span}</span>
               <span>→</span>

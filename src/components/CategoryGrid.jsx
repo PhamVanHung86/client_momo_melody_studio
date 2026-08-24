@@ -5,13 +5,13 @@ const categories = [
   {
     name: "Phone Charms",
     path: "/phone-charms",
-    image: "phone.jpg",
+    image: "keychan.jpg",
     desc: "Charm xinh xắn",
   },
   {
     name: "Keychain",
     path: "/keychain",
-    image: "key.png",
+    image: "phonecharm.jpg",
     desc: "Móc khóa độc đáo",
   },
   {
@@ -20,23 +20,24 @@ const categories = [
     image: "pins.jpg",
     desc: "Ghim cài cute",
   },
-  {
-    name: "Mail Club",
-    path: "/mail-club",
-    image: "mail.png",
-    desc: "Mail club bất ngờ",
-  },
+
   {
     name: "Postcards",
     path: "/postcards",
-    image: "card.png",
+    image: "postcard.jpg",
     desc: "Bưu thiếp vẽ tay",
   },
   {
     name: "Stickers",
     path: "/stickers",
-    image: "sticker.png",
+    image: "sticker.jpg",
     desc: "Sticker đủ kiểu",
+  },
+  {
+    name: "Mail Club",
+    path: "/mail-club",
+    image: "mail.png",
+    desc: "Mail club bất ngờ",
   },
 ];
 

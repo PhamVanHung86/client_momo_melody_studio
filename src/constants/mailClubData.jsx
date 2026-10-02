@@ -28,7 +28,7 @@ export const PLANS = [
     id: "quarterly",
     label: "Gói Quý",
     emoji: "🎀",
-    price: "365,00đ",
+    price: "365,000đ",
     duration: "3 tháng",
     benefits: [
       "3 Mail club handmade (các tháng mới) ",

@@ -160,7 +160,7 @@ const PlaceOrder = () => {
                 name="address"
                 value={form.address}
                 onChange={handleChange}
-                placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"
+                placeholder="Địa chỉ SAU SÁP NHẬP (số nhà, đường, phường/xã, tỉnh/thành phố)"
                 rows={3}
                 className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-[#FFFAF5] resize-none"
               />

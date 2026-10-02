@@ -299,7 +299,7 @@ const Profile = () => {
             {/* Địa chỉ */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#4A4A6A]/60">
-                Địa chỉ giao hàng mặc định
+                Địa chỉ giao hàng (Sau sáp nhập)
               </label>
               {editing ? (
                 <textarea
@@ -307,7 +307,7 @@ const Profile = () => {
                   onChange={(e) =>
                     setForm({ ...form, address: e.target.value })
                   }
-                  placeholder="Số nhà, đường, phường, quận, tỉnh/thành phố"
+                  placeholder="Địa chỉ SAU SÁP NHẬP (số nhà, đường, phường/xã, tỉnh/thành phố)"
                   rows={3}
                   className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#8B98E3] bg-white resize-none"
                 />

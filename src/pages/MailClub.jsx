@@ -14,6 +14,57 @@ import {
 } from "../utils/pendingMailClubPlan";
 import FireworksButton from "../components/FireworksButton";
 
+// 💳 Khối thông tin chuyển khoản + QR — dùng chung cho popup sau khi đăng ký
+// và cho phần "Chờ xác nhận" (khách chưa kịp thanh toán đã thoát ra).
+const PaymentInfo = ({ planObj, name, phone, compact = false }) => (
+  <>
+    <div className="bg-[#E8EAF9] rounded-2xl p-4 text-left text-sm text-[#4A4A6A] mb-5 space-y-1.5">
+      {planObj && (
+        <div className="bg-white/80 p-3 rounded-xl border border-[#CBD1F2] mb-3">
+          <p className="text-xs text-[#4A4A6A]/70">Gói đã chọn:</p>
+          <div className="flex items-center justify-between mt-0.5">
+            <span className="font-bold text-[#4A4A6A]">{planObj.label}</span>
+            <span className="text-base font-extrabold text-[#8B98E3]">
+              {planObj.price}
+            </span>
+          </div>
+        </div>
+      )}
+
+      <p className="font-semibold text-[#4A4A6A] mb-1">
+        Thông tin chuyển khoản:
+      </p>
+      <p>
+        Ngân hàng: <strong>TP Bank</strong>
+      </p>
+      <p>
+        Số TK: <strong>24182951170</strong>
+      </p>
+      <p>
+        Chủ TK: <strong>TRAN THI NGOC ANH</strong>
+      </p>
+      <p className="text-[#8B98E3] font-semibold mt-2 pt-1 border-t border-dashed border-[#CBD1F2]">
+        Nội dung CK: {name && phone ? `${name} - ${phone}` : "TÊN - SĐT"}
+      </p>
+    </div>
+
+    <div
+      className={`flex flex-col items-center justify-center bg-white p-3 rounded-xl border border-[#CBD1F2]/50 shadow-xs mx-auto ${
+        compact ? "max-w-[280px]" : "max-w-[400px]"
+      }`}
+    >
+      <img
+        src={qrCode}
+        alt="Mã QR Chuyển Khoản"
+        className="w-full aspect-square object-contain rounded-lg"
+      />
+      <span className="text-[10px] text-gray-400 mt-1.5 font-medium">
+        Quét mã để thanh toán nhanh
+      </span>
+    </div>
+  </>
+);
+
 const MailClub = () => {
   const { user } = useAuth();
 
@@ -463,6 +514,26 @@ const MailClub = () => {
                     </div>
                   )}
               </div>
+
+              {/* Khách đã đăng ký nhưng chưa được xác nhận thanh toán:
+                  hiện lại thông tin chuyển khoản để họ thanh toán sau */}
+              {mySubscription.status === "pending" && (
+                <div className="mt-5 pt-5 border-t border-dashed border-[#FFE680] text-center">
+                  <p className="text-sm font-semibold text-[#4A4A6A] mb-1">
+                    Bạn chưa thanh toán? 🩷
+                  </p>
+                  <p className="text-xs text-[#4A4A6A]/60 mb-4">
+                    Chuyển khoản theo thông tin bên dưới, Momo sẽ xác nhận gói
+                    cho bạn ngay khi nhận được nhé.
+                  </p>
+                  <PaymentInfo
+                    planObj={PLANS.find((p) => p.id === mySubscription.plan)}
+                    name={mySubscription.name}
+                    phone={mySubscription.phone}
+                    compact
+                  />
+                </div>
+              )}
             </div>
           )}
 
@@ -745,7 +816,7 @@ const MailClub = () => {
                       onChange={(e) =>
                         setForm({ ...form, address: e.target.value })
                       }
-                      placeholder="14, đường A, quận B..."
+                      placeholder="14, đường A, quận B... địa chỉ SAU SÁP NHẬP"
                       className="border border-[#CBD1F2] rounded-xl px-4 py-3 text-sm text-[#4A4A6A] outline-none focus:border-[#FFB7C5]"
                     />
                   </div>
@@ -787,49 +858,11 @@ const MailClub = () => {
                 🩷
               </p>
 
-              {/* Khung thông tin ngân hàng + Thông tin gói & Đơn giá */}
-              <div className="bg-[#E8EAF9] rounded-2xl p-4 text-left text-sm text-[#4A4A6A] mb-5 space-y-1.5">
-                {currentPlanObj && (
-                  <div className="bg-white/80 p-3 rounded-xl border border-[#CBD1F2] mb-3">
-                    <p className="text-xs text-[#4A4A6A]/70">Gói đã chọn:</p>
-                    <div className="flex items-center justify-between mt-0.5">
-                      <span className="font-bold text-[#4A4A6A]">
-                        {currentPlanObj.label}
-                      </span>
-                      <span className="text-base font-extrabold text-[#8B98E3]">
-                        {currentPlanObj.price}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                <p className="font-semibold text-[#4A4A6A] mb-1">
-                  Thông tin chuyển khoản:
-                </p>
-                <p>
-                  Ngân hàng: <strong>TP Bank</strong>
-                </p>
-                <p>
-                  Số TK: <strong>24182951170</strong>
-                </p>
-                <p>
-                  Chủ TK: <strong>TRAN THI NGOC ANH</strong>
-                </p>
-                <p className="text-[#8B98E3] font-semibold mt-2 pt-1 border-t border-dashed border-[#CBD1F2]">
-                  Nội dung CK: TÊN - SĐT
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center justify-center bg-white p-3 rounded-xl border border-[#CBD1F2]/50 shadow-xs max-w-[400px] mx-auto">
-                <img
-                  src={qrCode}
-                  alt="Mã QR Chuyển Khoản"
-                  className="w-full aspect-square object-contain rounded-lg"
-                />
-                <span className="text-[10px] text-gray-400 mt-1.5 font-medium">
-                  Quét mã để thanh toán nhanh
-                </span>
-              </div>
+              <PaymentInfo
+                planObj={currentPlanObj}
+                name={form.name}
+                phone={form.phone}
+              />
               <button
                 onClick={() => {
                   setSubmitted(false);

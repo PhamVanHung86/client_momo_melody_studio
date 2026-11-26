@@ -242,7 +242,7 @@ const Product = () => {
               <div className="bg-[#E8EAF9] p-2 rounded-xl border border-[#E8EAF9]/50 flex items-center gap-2">
                 <span className="text-base">📦</span>
                 <span className="text-[10px] sm:text-[11px] font-semibold text-[#4A4A6A]/80 leading-tight">
-                  Freeship đơn từ 300k
+                  Freeship đơn từ 200k
                 </span>
               </div>
               <div className="bg-[#E8EAF9] p-2 rounded-xl border border-[#E8EAF9]/50 flex items-center gap-2">

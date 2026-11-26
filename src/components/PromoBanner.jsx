@@ -16,7 +16,7 @@ const PromoBanner = () => {
             style={{ fontFamily: "'Dancing Script', cursive" }}
             className="text-3xl md:text-4xl text-[#4A4A6A] font-normal leading-snug mb-3"
           >
-            Miễn phí vận chuyển <br /> đơn từ 300k
+            Miễn phí vận chuyển <br /> đơn từ 200k
           </h2>
           <p className="text-sm text-[#4A4A6A]/70">
             Áp dụng toàn quốc — không cần mã giảm giá

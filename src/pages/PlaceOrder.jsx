@@ -9,7 +9,7 @@ import { apiFetch } from "../api/client";
 import FireworksButton from "../components/FireworksButton";
 
 // Hằng số ngưỡng miễn phí vận chuyển
-const FREE_SHIPPING_THRESHOLD = 300000;
+const FREE_SHIPPING_THRESHOLD = 200000;
 
 const PlaceOrder = () => {
   const {
